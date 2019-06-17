@@ -1,0 +1,10 @@
+﻿#过滤文件夹
+node_modules/
+
+#过滤文件
+.zip
+.rar
+.mp3
+.mp4
+.apk
+.ipa

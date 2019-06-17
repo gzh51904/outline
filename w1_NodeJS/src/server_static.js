@@ -72,8 +72,6 @@ const mime = require('./js/mime')
         res.end(data);
 
     });
-
-
  }).listen(1904,()=>{
      console.log('服务器连接成功...')
  })
