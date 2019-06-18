@@ -6,6 +6,8 @@
 //  引入express模块
  const express = require('express');//缓存
 
+ const proxy = require('http-proxy-middleware');
+
 //  引入路由
 const allRouter = require('./api');
 
@@ -17,6 +19,16 @@ const allRouter = require('./api');
 // 匹配静态资源,则返回
 // 如果不匹配,则next()进入下一个中间
 app.use(express.static('./'));
+
+// 代理服务器
+// /ali/xxx
+app.use('/ali/*', proxy({ 
+    target: 'https://h5api.m.taobao.com', //=>https://h5api.m.taobao.com/ali/xxx
+    changeOrigin: true,
+    pathRewrite: {
+        '^/ali': '/', // =>https://h5.api.m.taobao.com/xxx
+    },
+}))
 
 app.use(allRouter);
 

@@ -19,6 +19,8 @@ Router.route('/')
         data:[],
         msg:'所有商品'
     })
+
+    // res.send(JSON.stringify(req));
 })
 
 

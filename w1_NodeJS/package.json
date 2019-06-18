@@ -2,12 +2,13 @@
   "name": "w1_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server_express.js",
   "directories": {
     "doc": "doc"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1"
   },
   "devDependencies": {},
   "scripts": {

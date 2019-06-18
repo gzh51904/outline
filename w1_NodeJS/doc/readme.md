@@ -176,3 +176,46 @@
 
 * CommonJS模块化开发
     * 利用模块化开发实现服务器与路由的结合
+
+
+### 面试题
+* 原型链的理解
+    * Object.prototype
+    * js是一门基于对象的语言
+    * js一切皆对象
+
+    ```js
+        let obj = {username:'jingjing',age:36}
+
+        obj.age;//36
+
+        let num = 100;
+        num.toFixed()
+
+        //num = new Object(num);
+        //num.toFxied()
+        //delete num
+    ```
+* 计算数组元素出现的次数
+```js
+    let arr = [10,12,11,10,5,6,6,3,5,10] //=>{10:30,12:1,11:1,5:2,6:2,3:1}
+
+    let obj = {};//{10:1}
+    // 利用对象来实现
+
+    if(obj[item]===undefined){
+        obj[item] = 1
+    }else{
+        obj[item]++
+    }
+
+    // 去重
+    let newArr = new Set(arr);
+    newArr = Array.from(newArry);//newArr = [...newArr]
+```
+
+### 知识点
+* CORS
+* 服务器代理
+    * 有接口:后端代理
+    * 无接口:爬虫

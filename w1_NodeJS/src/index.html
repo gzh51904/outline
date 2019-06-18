@@ -9,5 +9,15 @@
 <body>
     <h1>Express静态资源服务器</h1>
     <img src="img/g1.jpg"/>
+
+
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log(JSON.parse(xhr.responseText));
+        }
+        xhr.open('get','http://localhost:1904/goods',true);
+        xhr.send();
+    </script>
 </body>
 </html>

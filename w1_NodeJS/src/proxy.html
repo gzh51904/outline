@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // https://h5api.m.taobao.com/h5/mtop.taobao.baichuan.smb.get/1.0/?jsv=2.5.1&appKey=12574478&t=1560843383948&sign=107d4dec0cfab906f452108c2e3f1668&api=mtop.taobao.baichuan.smb.get&v=1.0&type=originaljson&dataType=jsonp&timeout=10000
+        
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log(xhr.responseText);
+        }
+        // xhr.open('get','https://h5api.m.taobao.com/h5/mtop.taobao.baichuan.smb.get/1.0/?jsv=2.5.1&appKey=12574478&t=1560843383948&sign=107d4dec0cfab906f452108c2e3f1668&api=mtop.taobao.baichuan.smb.get&v=1.0&type=originaljson&dataType=jsonp&timeout=10000',true);
+        xhr.open('get','/ali/h5/mtop.taobao.baichuan.smb.get/1.0/?jsv=2.5.1&appKey=12574478&t=1560843383948&sign=107d4dec0cfab906f452108c2e3f1668&api=mtop.taobao.baichuan.smb.get&v=1.0&type=originaljson&dataType=jsonp&timeout=10000',true);
+        xhr.send();
+    </script>
+</body>
+</html>
