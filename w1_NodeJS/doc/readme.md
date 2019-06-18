@@ -88,3 +88,91 @@
     * post
     * put
     * delete
+
+## day1-2
+
+### 面试题
+* 跨域解决方案中的jsonp,CORS,服务器代理prox异同
+    * 为什么会有跨域限制:js是客户端语言
+    * 获取别人的数据
+    * jsonp
+        * 前端
+            * script标签
+            * 全局函数名
+        * 返回一段js代码(全局函数的执行代码)
+        * 缺点
+            * 不是ajax
+            * 只能发送get请求
+    * CORS(Cross Origin Resourse Sharing)
+        * 后端直接设置响应头
+            * Access-Control-Allow-Origin:*
+            * Access-Control-Allow-Headers
+            * Access-Control-Allow-Methods:post,get,put,delete
+    * 服务器代理
+        * 有接口:利用后端没有跨域限制的特点来代理前端的请求
+        * 无接口:爬虫
+
+### 复习
+* 静态资源服务器
+    * 原生Node
+        * http
+        * url
+        * fs
+        * path
+    * express
+        * express.static()
+* Express
+    > express就是原生nodejs的封装
+    * 中间件(middleware,一个函数)
+        * 内置
+        * 自定义
+    * 使用
+        * app.use([path],...middleware)
+        ```js
+            const express = require('express');
+            const app = exress();
+
+            app.use('/home',(req,res)=>{
+                res.send()
+            })
+
+            app.get('/goods',(req,res)=>{
+
+            })
+
+            app.post('/goods',(req,res)=>{
+
+            })
+            app.delete('/goods',(req,res)=>{
+
+            })
+        ```
+
+* RESTful API
+    * 根据请求类型或路径的不同作为不同接口返回数据
+
+
+### 知识点
+* 数据接口: BSR
+* 路由    : SSR
+
+* 动态路由: url传参中使用变量来表示某个数据
+* express后端接收数据
+    * search参数(get请求): req.query
+    * 动态路由:   req.params
+    * 请求体参数(post): req.body
+
+
+```js
+    //前端ajax请求
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('post','xx.php',true);
+    xhr.setRequestHeader('Content-Type','x-www-form-url-encoded');
+    // xhr.send('username=jingjing&password=123');// $_POST['username'], $_REQUEST['']
+    xhr.send('{"username":"jingjing","password":123}');
+
+```
+
+* CommonJS模块化开发
+    * 利用模块化开发实现服务器与路由的结合
