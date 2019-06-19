@@ -256,4 +256,38 @@
     * 难点：数据分析
     * cheerio：针对服务器包含jquery核心的库
 * fs
-    * 
+    * file
+    * stream
+        * pipe
+    ```js
+
+        gulp.src('./src/js/*.js') //得到一个文件流stream
+
+        .pipe(gulyfy())
+        .pipe(concat())
+    ```
+
+### 面试题
+* 语义化标签：合适的位置使用正确的标签
+    * div,ul/ol,h1-6,p -> header,footer,main,article,nav,aside,section....
+    * span,strong,em,img,...
+    * SEO
+        * 语义化标签
+        * 合理的布局
+        * 关键字排布
+        * 保持原创
+        * 热搜
+
+### 知识点
+
+* 数据库
+    * SQL(关系型数据)
+        * Oracle
+        * MySQL -> MariaDB
+        * SQLServer
+    * 数据库操作
+        * 查：`select <字段1, 字段2, ...> from <表名> where <条件>`
+
+* Promise
+    * async
+    * await
