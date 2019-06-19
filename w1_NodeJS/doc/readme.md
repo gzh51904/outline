@@ -219,3 +219,41 @@
 * 服务器代理
     * 有接口:后端代理
     * 无接口:爬虫
+
+## day1-3
+
+### 面试题
+* 如何让图片居中(不知道图片的宽度)
+    ```js
+        img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+
+        // 不支持css3的浏览器如何实现
+        // js计算
+        // 如何获取图片宽高:img.width/img.height(前提:图片加载完成并显示)
+        // img.onload = ()=>{img.width/img.height}
+    ```
+* 事件传播
+    * 事件冒泡
+    * 事件捕获
+    * 事件源对象： e.target/e.srcElement
+    * 事件绑定对象: this/e.currentTarget
+
+### 复习
+* Express模块化路由
+    * commonJS模块化
+    * 中间件express.Router
+* 跨域解决方案
+    * jsonp
+    * CORS
+    * 代理服务器
+        * 有接口无授权：代理http-proxy-middleware
+        * SSR:爬
+            * 难点：数据分析
+            * cheerio：针对服务器包含jquery核心的库
+
+### 知识点
+* 爬虫
+    * 难点：数据分析
+    * cheerio：针对服务器包含jquery核心的库
+* fs
+    * 

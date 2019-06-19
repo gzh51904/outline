@@ -5,6 +5,7 @@ const Router = express.Router();
 const goodsRouter = require('./goods');
 const regRouter = require('./reg');
 const loginRouter = require('./login');
+const spiderRouter = require('./spider');
 
 
 Router.use(express.urlencoded({extended:false}),express.json());
@@ -43,6 +44,7 @@ Router.use((req,res,next)=>{
 Router.use('/goods',goodsRouter);
 Router.use('/reg',regRouter);
 Router.use('/login',loginRouter);
+Router.use('/spider',spiderRouter);
 
 
 
