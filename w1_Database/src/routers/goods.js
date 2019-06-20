@@ -15,17 +15,17 @@ const query = require('../db');
 // });
 
 
-var mysql = require('mysql');
+// var mysql = require('mysql');
 
-  //创建连接池
-  var pool  = mysql.createPool({
-      host     : 'localhost',
-      user     : 'root',
-      password : '',
-      port: 3306,
-      database: 'jiaoxue',
-      multipleStatements: true
-  });
+//   //创建连接池
+//   var pool  = mysql.createPool({
+//       host     : 'localhost',
+//       user     : 'root',
+//       password : '',
+//       port: 3306,
+//       database: 'jiaoxue',
+//       multipleStatements: true
+//   });
 
 
 
@@ -61,17 +61,34 @@ Router.route('/')
 
 
 
-// 删除单个商品
+// 增加单个商品
 .post((req,res)=>{
-    console.log('params:',req.params);
+    console.log('params:',req.body);//{name,price,category,imgurl,...}
 
     let id = Date.now();
 
-    res.send({
-        code:1000,
-        data:[],
-        msg:`添加商品${id}成功`
+    let names = '',values = '';
+    for(let key in req.body){
+        names += key + ',';
+        values += '"' + req.body[key] + '",'
+    }
+
+    // 去除多余逗号
+    names = names.slice(0,-1)
+    values = values.slice(0,-1)
+
+    let sql = `insert into goods(${names}) values(${values})`;
+
+    query(sql).then(data=>{
+        res.send(formatData({data}))
+    }).catch(err=>{
+        res.send(formatData({
+            data:err,
+            code:250
+        }))
     })
+
+    
 });
 
 
@@ -79,19 +96,34 @@ Router.route('/')
 Router.route('/:id')
 
 // 修改单个商品
-.put((req,res)=>{
+// put
+.patch((req,res)=>{
     // 请求体中的参数会被express格式化到req.body
     console.log('params:',req.params);
     console.log('body:',req.body);
 
     let {id} = req.params;
     
+    let opt=''; // name="xxx", price="998"
+    for(let key in req.body){
+        opt += `${key}='${req.body[key]}',`
+    }
 
-    res.send({
-        code:1000,
-        data:[],
-        msg:`修改商品${id}成功`
+    // 去除多余逗号
+    opt = opt.slice(0,-1)
+
+
+    let sql = `update goods set ${opt} where id=${id}`;
+
+    query(sql).then(data=>{
+        res.send(formatData({data}))
+    }).catch(err=>{
+        res.send(formatData({
+            data:err,
+            code:250
+        }))
     })
+    
 })
 
 
@@ -135,10 +167,13 @@ Router.route('/:id')
     let {id} = req.params;
     console.log('params:',req.params)
 
-    res.send({
-        code:1000,
-        data:[],
-        msg:`删除id=${id}商品成功`
+
+    let sql = `delete from goods where id=${id}`;
+
+    query(sql).then(data=>{
+        res.send(formatData());
+    }).catch(err=>{
+        res.send(formatData({data:err,code:250}))
     })
 });
 

@@ -291,3 +291,66 @@
 * Promise
     * async
     * await
+
+
+## day1-4
+
+### 面试题
+* 被问的问题发到群里
+```
+    格式：
+    #面试题#
+    1. xxxx
+    2. xxxx
+
+```
+* 伪数组如何使用数组的方法
+```js
+    let arr = [10,20,30];//Array
+    arr.map(item=>item**2);//[100,400,900]
+
+    let divs = document.getElementsByTagName('div');//HTMLCollection  [div,div,div]
+    let btns = document.querySelectorAll('.btn');//NodeList [button,button,button]
+    // btns.map();//map is not a function 
+     Array.prototype.map = function(fn){
+        // 如何获取arr
+        let arr = []
+        for(var i=0;i<this.length;i++){
+            arr.push(fn(this[i],i,this))
+        }
+
+        return arr;
+    }
+   
+    let arr = new Array(10,20,30);
+    // 直接用
+    arr.map(function(item,idx,arr){
+        return item**2
+    });//[100,400,900]
+
+    // 借用:call & aplly
+    Array.prototype.map.call(btns,function(item){})
+    Array.prototype.map.apply(btns,[function(item){}])
+
+```
+
+* 为元素与伪类
+    * 伪类： :hover,:nth-child().....
+    * 伪元素： ::after,::before, ::first-letter, ::first-line
+
+### 复习
+* 爬虫
+    * request
+    * cheerio
+* 数据库
+    * mock数据
+    * mySQL
+
+### 数据库
+* mySQL
+    * 编写SQL语句
+        * 增
+        * 删
+        * 改
+        * 查
+        * 条件
