@@ -384,3 +384,68 @@
     8. UAT（用户测试环境）
     9. 上线
     10. 运维
+
+* 项目上线
+    1. 购买服务器（ali云）
+    2. 配置服务器
+        * 安全组：用于设置访问权限
+        * 连接密码：用于远程连接
+        * 实例密码：用于登录系统
+
+
+## day1-5
+
+### 面试题
+* 如何判断用户环境
+* setInterval(fn,duration)有无其他替代方法
+    * 嵌套setTimeout()
+    * 丢帧
+```js
+    setTimeout(()=>{console.log(6666)},1000);
+    setInterval(()=>{},1000);
+    setTimeout(function show(){
+        setTimeout(show,1000)
+    },1000)
+    for(let i=0;i<100000000,i++){
+
+    }
+```
+
+### 复习
+* 开发流程
+    * code review
+    * 测试
+        * 开发测试
+        * 测试团队
+        * UAT
+    ....
+* 上线流程
+    * 专人
+* mySQL
+    * Node -> mysql
+        * 连接对象
+        * 连接池 （推荐）
+
+### 知识点
+* 关系型数据库
+    * Oracle
+    * MySQL/MariaDB
+    * SQLServer
+    * ....
+* 非关系型数据库
+    * MongoDB
+
+
+* 数据库对比
+                MySQL           MongoDB
+数据库          database        database
+表              table           collection
+数据            row             document       
+
+```js
+    // 或
+    db.user.find({$or:[{age:{$gt:18}},{description:"成年"}]})
+
+    //and
+    db.user.find({age:18,description:"成年"})
+```

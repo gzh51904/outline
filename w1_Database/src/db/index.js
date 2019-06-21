@@ -10,14 +10,13 @@ var pool  = mysql.createPool({
     multipleStatements: true
 });
 
-module.exports = (sql)=>{
+module.exports = sql=>{
     return new Promise((resolve,reject)=>{
-        pool.query(sql, function(error, data){
+        pool.query(sql, (error, data)=>{
             if(error){
                 reject(error)
             }
             resolve(data);// 改变promise状态Resolved
         });
     })
-   
 }
