@@ -2,10 +2,15 @@ const express = require('express');
 
 const Router = express.Router();
 
-const {insert} = require('../db/mongo');
+const {mongo:{find}} = require('../db');
 
-Router.post('/',(req,res)=>{
-    res.send('登录成功')
+Router.get('/',async (req,res)=>{
+    let {username,password} = req.query;console.log(username,password)
+
+    let result = await find('user',{username,password});console.log(result)
+
+
+    res.send(result)
 })
 
 

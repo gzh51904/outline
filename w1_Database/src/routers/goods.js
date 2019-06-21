@@ -2,7 +2,7 @@ const express = require('express');
 
 const Router = express.Router();
 const {formatData} = require('../utils');
-const query = require('../db');
+const {mysql:query} = require('../db');
 
 // var mysql = require('mysql');
 

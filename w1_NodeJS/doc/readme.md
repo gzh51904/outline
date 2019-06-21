@@ -449,3 +449,44 @@
     //and
     db.user.find({age:18,description:"成年"})
 ```
+
+* 在Nodejs中操作MongoDB
+    * mongoose
+    * mongodb
+
+### 面试题
+* 本地存储（客户端存储）
+    * cookie(服务端session)
+        * 与服务器通讯
+    * web storage
+    * webSQL
+    * IndexDB
+* 前端与后端协作需要注意的问题
+    * 沟通
+    * 接口数据格式
+    * 编码
+    ....
+* chrome浏览器设置小于12px的字体
+    * -webkit-font-size-adjust:11px;//V27+
+    * font-size:12px;transform:scale(0.85)
+
+### 知识点
+* MongoDB的封装
+    * 增
+        * async & await
+
+* 二次封装
+    * 
+### 周末练习
+* 把二阶段项目上线
+* 把二阶段的项目使用mysql来实现
+* 学会爬数据
+
+
+## 后期内容
+* websocket
+* 注册登录
+    * 加密
+    * 保持登录状态：token
+    * 上传
+
