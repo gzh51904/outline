@@ -10,7 +10,8 @@
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "ws": "^7.0.1"
   },
   "devDependencies": {},
   "scripts": {

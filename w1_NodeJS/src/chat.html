@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多人聊天室</title>
+    <style>
+        ul{list-style: none;padding:0;margin:0;}
+        .msg-list{position:relative;width:600px;margin:0 auto;}
+        .msg-list ul{padding:10px;min-height:200px;max-height:400px;overflow-y:auto;border:1px solid #ddd;}
+        .msg-list li{float:left;clear:both;margin:10px 0;padding:5px;line-height:2;border-radius:5px;background-color:#efefef;}
+        .msg-list li h4{margin:0}
+        .msg-list li time{font-size:10px;transform: scale(0.8)}
+        .msg-list li.active{float:right;background-color:#58bc58;color:#fff;}
+        .msg-list textarea{display:block;min-height:50px;margin:10px 0;width:100%;box-sizing: border-box;}
+        .status{display:none;position: absolute;left:50px;bottom:0;right:0;padding:5px 10px;text-align:center;color:#999;}
+        .login{text-align:right;}
+    </style>
+</head>
+<body>
+    <h1>多人聊天室</h1>
+    <div id="autoAnswer" class="msg-list">
+        <div class="login">
+            <input type="text" name="username" id="username">
+            <button class="btn-login">进入</button>
+            <button class="btn-logout">退出</a></div>
+        <ul>
+        </ul>
+        <textarea></textarea>
+        <button class="btn-send">提交</button>
+        <div class="status"></div>
+    </div>
+
+
+    <script>
+        /**
+         * WebSocket客户端
+         
+
+            前后端协商socket状态(统一数据格式:{status,data}):
+				status:
+					0:退出登录
+					1:登录成功
+					2:发送消息
+				data:{username,content,time}
+
+         */
+
+        let autoAnswer = document.querySelector('#autoAnswer');
+        let login = autoAnswer.querySelector('.login');
+        let username = login.children[0];
+
+        let msglist = autoAnswer.querySelector('ul');
+        let msg = autoAnswer.querySelector('textarea');
+        let btnSend = autoAnswer.querySelector('.btn-send');
+        let status = autoAnswer.querySelector('.status');
+
+        var socket, 
+        wsurl = 'ws://localhost:1904',
+
+        // 存放用户发送的消息
+        datalist=[];
+
+        login.onclick = ({target})=>{
+            // 点击进入按钮后连接ws服务器
+            if(target.className =='btn-login'){
+                if(username.value == ''){
+                    status.style.display = 'block';
+                    status.innerText = '请输入昵称';
+                    username.focus();
+                    return 
+                }
+
+                //  连接ws服务器
+                socket = new WebSocket(wsurl);
+
+
+                // 当连接成功后执行onopen事件处理函数
+                socket.onopen = ({target:{url}})=>{
+                    status.style.display = 'block';
+                    status.innerText = '服务已连接 ' + url;
+                    username.disabled = true;
+
+                    // setTimeout(()=>{
+                    //     status.style.display = 'none';
+                    // },5000);
+
+                    // 发送消息给服务器,让服务器转发我已登录的消息
+                    let data = {
+                        status:1,
+                        data:{
+                            username:username.value
+                        }
+                    }
+                    socket.send(JSON.stringify(data));
+                }
+
+                // 接收服务端消息
+                socket.onmessage = e=>{
+                    // 获取服务器消息
+                    let res = JSON.parse(e.data);
+
+                    console.log('data:',res);
+
+                    switch(res.status){
+                        case 0:
+                            status.innerHTML = res.data.username + '退出入聊天室...';
+                            break;
+                        case 1:
+                            status.innerHTML = res.data.username + '进入聊天室...';
+                            break;
+                        case 2:
+                            datalist.push(res.data);
+                            render();
+                    }
+                }
+
+               
+            }else if(target.className == 'btn-logout'){
+                if(!socket) return status.innerHTML = '是不是傻，没登陆哪来退出';
+
+                // 退出
+                username.disabled = false;
+                socket.send(JSON.stringify({status:0,data:{username:username.value}}));
+                setTimeout(()=>{
+                    // 关闭socket服务器
+                    socket.close();
+                    socket = null;
+                },500)
+            }
+        }
+
+
+        // 发送消息
+        btnSend.onclick = ()=>{
+            if(!socket){
+                status.style.display = 'block';
+                username.focus();
+                return status.innerText = '请先登录'
+            }
+
+            // 获取输入的消息
+            let _msg = msg.value;
+
+            let data = {
+                status:2,
+                data:{
+                    username:username.value,
+                    content:_msg,
+                    time:Date.now()
+                }
+            }
+
+            socket.send(JSON.stringify(data));
+
+            // 清空并获得焦点
+            msg.value = '';
+            msg.focus();
+        }
+
+        // 渲染消息的方法
+        function render(){
+            msglist.innerHTML = datalist.map(item=>`<li ${item.username==username.value ? 'class="active"':''}>
+                <h4>${item.username}</h4>
+                <div>${item.content}</div>
+                <time>${item.time}</time>
+            </li>`).join('');
+        }
+       
+
+        
+    </script>
+</body>
+</html>

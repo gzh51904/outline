@@ -490,3 +490,48 @@
     * 保持登录状态：token
     * 上传
 
+## day2-1
+
+### 复习
+* MongoDB
+    * 命令行
+    * 可视化工具 Robo 3T
+    * NodeJS中使用MongoDB
+        * 驱动
+            * mongoose
+            * mongodb
+        * 增删改查
+            * insertOne(data)/insertMany([...data])
+            * deleteOne(query)/deleteMany(query)
+            * updateOne(query,data)/updateMany(query,data)
+            * find(query)/findOne(query)
+    * 导入导出
+    * 备份恢复
+* Promise
+    * async & await
+        * async函数返回一个状态为Resolved的pormise对象，可以单独使用
+        * await等待一个promise对象的返回结果，必须写在async函数中
+
+### 知识点
+* HTML5新特性
+    * WebStorage
+        * localStorage
+        * sessionStorage
+    * WebSocket
+        * http/https(短连接)：从客户端发起请求（主动），然后服务端响应（被动），请求结束（客户端与服务端断开连接）
+        * websocket（长连接）：客户端请求后不会与服务端断开连接，服务端可以主动推送消息
+            * 客户端
+                * 连接WebSocket服务器： WebSocket
+                * 发送消息与接收消息
+            * 服务端
+                * 启动WebSocket服务器: ws
+                * 转发与推送
+        * 应用场景
+            * 多人聊天室
+            * 站内消息
+            * 邮件系统
+            * 点餐系统
+            * .....
+
+* bug重现
+
