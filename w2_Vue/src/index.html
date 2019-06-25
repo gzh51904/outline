@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的使用</title>
+</head>
+<body>
+    <h1>Vue的实例化</h1>
+    <div id="app">
+        <h4>{{username}}</h4>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  Vue的使用
+                * 实例化
+                * 配置参数
+                    * el： Vue实例的挂载目标，让Vue接管el所在的元素
+                    * data: 渲染到视图（html）的数据
+        
+            * 传统写入内容方式
+                1. 获取元素
+                2. innerText/innerHTML
+                3. 修改数据必须重新操作innerText/innerHTML
+            * Vue写入内容的方式
+                * 数据驱动：修改数据->Vue自动帮我们更新视图
+                    * 数据驱动的原理
+                * 数据渲染：{{}}
+         */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie'
+            }
+        });
+    </script>
+</body>
+</html>

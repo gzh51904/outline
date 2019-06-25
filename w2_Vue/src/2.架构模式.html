@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>架构模式</title>
+</head>
+<body>
+    <h1>架构模式</h1>
+    <div id="app">
+        <!-- View视图层 -->
+        <h4>用户名：{{username}}</h4>
+        <p>密码：{{password}}</p>
+        <p>年龄：<span id="age"></span></p>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  架构模式
+            * MVC
+            * MVP
+            * MVVM
+                * M: Model
+                * V: View
+                * VM: ViewModel
+         */
+
+        // Model数据层
+        let data = {
+            username:'laoxie',
+            password:123456
+        }
+
+        // ViewModel逻辑处理层
+        // 连接View与Model，并处理相应的逻辑
+        let vm = new Vue({
+            el:'#app',
+
+            // 1.当实例化且配置data参数时，Vue会遍历data中的所有属性，并把他们设置成getter和setter
+            // 2.并且在数据有更新时，在setter中更新视图
+            data
+        });
+
+
+
+        // 存储器属性
+        // getter & setter
+        let jingjingage = 18;
+        let person = {
+            // 值属性
+            username:'jingjing',
+
+            // 存储器属性
+            get age(){
+                console.log('getter')
+                return jingjingage
+            },
+            set age(val){
+                console.log('setter.val:',val);
+                jingjingage = val;
+                document.getElementById('age').innerHTML = jingjingage;
+            }
+        }
+        document.getElementById('age').innerHTML = jingjingage;
+
+        // person.age;//调用getter，返回getter中return的值
+        // person.age = 36;//调用setter，并把36作为参数传入setter
+    </script>
+</body>
+</html>
