@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.响应式属性的原理</title>
+</head>
+<body>
+    <h1>3.响应式属性的原理</h1>
+    <div id="app">
+        <!-- View视图层 -->
+        <h4>用户名：{{username}}</h4>
+        <p>密码：{{password}}</p>
+        <p>年龄：{{age}}</p>
+        <div>{{score}}</div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  3.响应式属性的原理
+                * 实例化过程中会遍历data(Model)所有的属性（把属性添加到响应式系统中）
+                    * 通过Object.defineProperty()把它们变成getter&setter
+                    * 并写入Vue实例
+                
+
+
+                PS: 能写入视图的数据变量都是Vue实例的属性(从ViewModel拿数据显示到View中)
+
+            * 属性特性（重点）
+                * 设置：Object.defineProperty(obj,key,discriptor)
+                * 获取：Object.getOwnPropertyDescriptor()
+                * discriptor{}
+                    * 值属性
+                        * configurable  可配置性（总开关：是否可修改writable&enumerable）
+                        * enumerable 可枚举性（是否可遍历）
+                        * value     值
+                        * writable  可写性
+                    * 存储器属性
+                        * configurable
+                        * enumerable
+                        * get
+                        * set
+         */
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'jingjing',
+                password:123456,
+                age:36,
+                score:{
+                    en:148,
+                    math:60
+                }
+            }
+        });
+
+        // 非响应式属性：后期添加的属性
+        // vm.score.chinese = 140;
+
+        // 后期添加的属性是否可以变成响应式属性呢？
+        // vm.$set() / Vue.set(target, propertyName/index, value )
+        // vm.$set(vm.$data.score,'chinese',130)
+        // 以下操作报错（不能后期添加响应式的实例属性和根数据属性）:
+        // vm.$set(vm,'className',1904)
+        // vm.$set(vm.$data,'className',1904)
+
+
+        let obj = {
+            username:'laoxie',
+            get score(){
+                return 100;
+            },
+            set score(val){
+
+            }
+        }
+
+        //设置值属性
+        obj.age = 18;//obj.age = 19;
+
+        Object.defineProperty(obj,'age',{
+            writable:false,
+            enumerable:false
+        })
+
+        // 设置存储器属性
+        Object.defineProperty(obj,'gender',{
+            enumerable:false,
+            get(){
+                return '男'
+            },
+            set(val){
+                console.log('setter:',val)
+            }
+        })
+    </script>
+</body>
+</html>

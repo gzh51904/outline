@@ -105,3 +105,67 @@
         * getter
         * setter
             * 在setter中更新视图
+    * 值属性
+    * 关注点放在数据而不是节点
+        * 声明式渲染：别人声明好的东西直接拿来用，只关注结果而不用关注过程
+
+### 面试题
+* call & apply & bind的异同
+    * 共同点
+        * 都是函数的方法（Function.prototype）
+        * 都能改变this指向
+    * 不同点
+        * call&apply会调用函数
+        * bind不会调用函数，但返回一个新的函数
+
+    ```js
+        // this指向
+        function show(){ console.log(this)};
+
+        show();//window
+        let obj = {show};
+        obj.show();//obj
+        let s = new show();// s
+
+        // 箭头函数
+        let show2 = ()=>{ console.log(this,arguments) }
+
+        //
+        let person = {}
+        show.bind(person);//仅仅改变this指向，不会执行show方法
+        show.call(person);//改变this指向，并执行show方法
+        show.apply(person);//同上
+
+    ```
+* git的常用命令
+    * git init
+    * git status
+
+    * git add 
+    * git commit 
+    * git push
+    * git pull / git fetch
+    * git clone
+
+    * git branch
+    * git checkout
+    * git merge
+
+    * git reset
+    * git log
+
+* 项目构建（grunt->gulp->webpack）
+    * 编译
+    * 合并
+    * 压缩
+    * 输出
+
+## 知识点
+* vue的实例化过程
+    1. 实例化并配置参数new Vue({...options})
+    2. 配置参数
+        * el    挂载点
+        * data  实例化过程中会遍历data所有的属性，把它们变成getter&setter，并写入Vue实例
+* todolist
+    * 增删改查
+    * bootstrap

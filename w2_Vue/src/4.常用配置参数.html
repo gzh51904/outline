@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.常用配置参数</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>4.常用配置参数</h1>
+        <div id="app">
+            <div>
+                <img src="img/t1.jpg" v-if="show"/>
+                <img src="img/g2.jpg" v-else/>
+            </div>
+            <button class="btn btn-success" v-on:click="sh">显示/隐藏</button>
+        </div>
+    </div>
+    <template id="content">
+        <!-- 只能有一个根元素 -->
+        <div>
+            <img src="img/g1.jpg"/>
+            <h4>{{title}}</h4>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            配置参数
+                * data
+                * methods
+                * template
+
+            指令（自定义的html属性）
+                * v-show    显示隐藏（频繁操作）
+                * v-if      节点的删除与写入
+                    * v-else
+                    * v-if-else
+                * v-on:事件类型
+
+            
+            PS：指令值都是变量（实例的属性）
+         */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                show:true,
+                title:'乌克兰美女'
+            },
+
+            template:`#content`,
+
+            // 方法
+            methods:{
+                sh(){
+                    // 函数中的this指向vm实例
+
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+</html>
