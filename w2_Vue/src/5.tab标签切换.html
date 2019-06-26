@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tab标签切换</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>tab标签切换</h1>
+        <div id="app">
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" v-for="(tab,idx) in tabs">
+                        <a class="nav-link" v-bind:class="{active:activeIdx===idx}" href="#" v-on:click="changeTab(idx,$event)">{{tab.title}}</a>
+                    </li>
+                </ul>
+                <div class="content">
+                    <div class="py-5 px-2 border" v-for="(tab,idx) of tabs" v-bind:idx="idx" v-show="activeIdx===idx">{{idx+1}} - {{tab.content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            指令
+            * v-for
+            * v-bind
+                * 任何属性都可以使用`v-bind:属性`
+                * 专门对class和style属性进行增强,可以支持数组和对象
+                * 简写：v-bind:idx="10" -> :idx="10"
+            
+            事件
+                * v-on
+                    * 简写：v-on:click="handle" -> @click="handle"
+                * 事件处理函数
+                    * 默认第一个参数为event对象（不传参）
+                    * 传参时如何获取event对象
+                        * 在事件触发时，vm实例下会创建一个$event属性，就是event对象
+         */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                tabs:[{
+                    title:'laoxie',
+                    content:'laoxie爱好写代码'
+                },{
+                    title:'jingjing',
+                    content:'jingjing爱好男'
+                },{
+                    title:'dingding',
+                    content:'dingding爱好大保健'
+                }],
+                activeIdx:0
+            },
+            methods:{
+                // 事件处理函数传参
+                changeTab(idx,e){console.log(idx,e)
+                    this.activeIdx = idx
+                }
+            }
+        })
+    </script>
+    </script>
+</body>
+</html>

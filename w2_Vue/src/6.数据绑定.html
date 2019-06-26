@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6.数据绑定</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>6.数据绑定</h1>
+        <div id="app">
+            <h4>用户名：{{username}}</h4>
+            <code>
+                <pre v-text="username"></pre>
+            </code>
+            <p v-html="username"></p>
+
+            <div class="form">
+                <h4>用户登录</h4>
+                <div class="form-group">
+                    <label for="username">用户名：</label>
+                    <!-- <input type="text" class="form-control" id="username" v-model="username" /> -->
+                    <input type="text" class="form-control" id="username" v-bind:value="username" v-on:input="change" />
+                </div>
+                <div class="form-group">
+                    <label for="username">密码：</label>
+                    <input type="password" class="form-control" id="password" v-model="password" />
+                </div>
+                <button class="btn btn-success">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            单向数据绑定
+                * 属性
+                    * v-bind
+                        * 任何属性都可以使用`v-bind:属性`
+                        * 专门对class和style属性进行增强,可以支持数组和对象
+                        * 简写：v-bind:idx="10" -> :idx="10"
+                * 内容
+                    * {{}}
+                    * v-text
+                    * v-html
+            双向数据绑定
+                * v-model 一般用于表单元素
+                * 双数据绑定的原理（v-model的原理）
+                    * Model -> View  ： getter&setter
+                    * View  -> Model ： 事件
+
+                    * 结论：
+                        * 双向数据绑定 = 单向+事件
+                        * v-model的原理：v-bind:value="xxx" + v-on:input="xxx"
+         */
+
+        let model = {
+            content: '<strong>laoxie</strong>',
+            username:'laoxie',
+            password:123456
+        }
+        let vm = new Vue({
+            el: '#app',
+            data: model,
+            methods:{
+                change(e){
+                    this.username = e.target.value;
+                }
+            }
+        })
+
+
+        // View -> Model
+        // username.oninput = e=>{
+        //     model.username = e.target.value;
+        // }
+    </script>
+    </script>
+</body>
+
+</html>

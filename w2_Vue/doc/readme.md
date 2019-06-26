@@ -160,7 +160,7 @@
     * 压缩
     * 输出
 
-## 知识点
+### 知识点
 * vue的实例化过程
     1. 实例化并配置参数new Vue({...options})
     2. 配置参数
@@ -169,3 +169,69 @@
 * todolist
     * 增删改查
     * bootstrap
+
+## day2-3
+
+### 面试题
+* 怎么理解响应式属性
+    * 响应式系统
+    * 后期添加响应式属性
+        * Vue.set(target)
+        * this.$set(target)
+* 后端返回格式不符合预期如何处理
+    * 处理数据
+* get&post的区别
+    * 语义
+        * get：查（获取）
+        * post:增（添加）
+    * 参数传送方法
+        * get:url
+        * post: request body
+    * 传输大小
+        * url长度限制了get请求的参数大小
+    * 编码
+        * get: URL编码
+    * ....
+
+
+### 复习
+* 响应式属性
+    * 属性特性
+        * 值属性
+            * configurable
+            * enumerable
+            * writable
+            * value
+        * 存储器属性
+            * configurable
+            * enumerable
+            * get
+            * set
+* 架构模式
+    * MVC
+    * MVP
+    * MVVM
+* 数据绑定
+    * {{实例属性}}
+
+* 指令
+    * v-show
+    * v-if
+        * v-else
+        * v-else-if
+    * v-on
+* 配置参数
+    * el
+    * data
+    * template
+    * methods
+
+
+### 知识点
+* 列表循环
+    * v-for: `v-for="item in tabs"`
+* 数据绑定
+    * 内容：{{}}
+    * v-bind: `v-bind:id="current"`
+        * 任何属性都可以使用`v-bind:属性`
+        * 专门对class和style属性进行增强,可以支持数组和对象
