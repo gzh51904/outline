@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>延迟js代码的执行</title>
+</head>
+
+<body>
+    <script defer src="http://www.xx.com/xx.js"></script>
+    <script>
+        // script内容的加载和执行会阻塞后面代码的执行
+        console.log('start')
+        document.querySelector('#username');//null
+
+        window.onload = function(){
+            // 太慢：等页面所有东西（包括资源文件：图片）
+            console.log('window.onload')
+        }
+
+        function jQuery(){}
+        jQuery(function(){
+
+        })
+
+        // document事件
+        document.onreadystatechange = function(){
+            if(document.readyState === 'interactive'){
+                // 比较麻烦，需要判断readyState
+                console.log('readystatechange.interactive')
+            }else if(document.readyState === 'complete'){
+                console.log('readystatechange.complete')
+            }
+        }
+        document.addEventListener("DOMContentLoaded",function(){
+            console.log('DOMContentLoaded')
+        });
+
+
+        </script>
+    <script async>
+        // script标签的属性
+        // * type: text/javascript（默认）
+        // * src : js文件路径
+        console.log('async')
+    </script>
+    <script defer>
+            // script标签的属性
+            // * type: text/javascript（默认）
+            // * src : js文件路径
+            console.log('defer')
+    </script>
+    <h1>延迟js代码的执行</h1>
+
+    <input type="text" id="username">
+
+    <script>
+        document.querySelector('#username');//Node
+        console.log('end')
+    </script>
+</body>
+
+</html>

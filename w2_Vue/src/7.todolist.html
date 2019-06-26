@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>7.todolist</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>7.todolist待办事项列表</h1>
+        <div id="app">
+            <div class="todoList">
+                <div class="input-group">
+                    <input type="text" class="form-control" v-model="title" ref="title" v-on:keyup.13="add">
+                    <div class="input-group-append">
+                        <input type="date" v-model="date" class="border">
+                        <button class="btn btn-success" type="button" v-on:click="add">添加</button>
+                    </div>
+                </div>
+                <table class="table mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">待办事项</th>
+                            <th scope="col">预期时间</th>
+                            <th scope="col">是否完成</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,idx) in weilist">
+                            <th scope="row">{{idx+1}}</th>
+                            <td>{{item.title}}</td>
+                            <td>{{item.date}}</td>
+                            <td>{{item.done?'是':'否'}}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-primary" @click="complete(item.id)">完成</button>
+                                    <button class="btn btn-outline-danger" @click="remove(item.id)">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">完成事项</th>
+                            <th scope="col">完成时间</th>
+                            <th scope="col">是否完成</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,idx) in donelist">
+                            <th scope="row">{{idx+1}}</th>
+                            <td>{{item.title}}</td>
+                            <td>{{item.date}}</td>
+                            <td>{{item.done?'是':'否'}}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-primary">查看</button>
+                                    <button class="btn btn-outline-danger" @click="remove(item.id)">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="status">总共：{{todolist.length}}，待办：{{weilist.length}}，完成:{{donelist.length}}</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            7.todolist待办事项列表
+                * 输入
+                    * 添加待办事项
+                * 显示
+                    * 待办事项
+                    * 完成事项
+                    * 数量
+                * 删除
+                * 修改
+         */
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                todolist: [{
+                    id: Date.now(),
+                    title: '如果你不能拼爹，就只能拼命',
+                    date: '2019-6-26',
+                    done: false
+                }, {
+                    id: Date.now(),
+                    title: '拼搏到无能为力，坚持到感动自己',
+                    date: '2019-3-25',
+                    done: true
+                }],
+                title:'',
+                date:''
+            },
+            computed:{
+                // computed中的数据就是getter/setter（默认getter）
+                // computed属性中的this指向实例
+                donelist(){
+                    return this.todolist.filter(item=>item.done)
+                },
+                weilist(){
+                    return this.todolist.filter(item=>!item.done)
+                }
+                // donelist:{
+                //     get(){
+
+                //     },
+                //     set(){}
+                // }
+            },
+            methods:{
+                add(e){
+                    let {date,title} = this;
+                    let data = {
+                        id:Date.now(),
+                        title,
+                        done:false,
+                        date
+                    }
+                    this.todolist.unshift(data);
+
+                    // 清空并获得焦点
+                    this.title = '';
+                    this.$refs.title.focus();
+                },
+
+                // 完成
+                complete(id){
+                    this.todolist.forEach(item=>{
+                        if(item.id == id){
+                            item.done = true;
+                        }
+                    })
+                },
+
+                // 删除
+                remove(id){
+                    for(let i=0;i<this.todolist.length;i++){
+                        if(this.todolist[i].id == id){
+                            this.todolist.splice(i,1);
+                            break;
+                        }
+                    }
+        
+                }
+            }
+        })
+
+
+    </script>
+    </script>
+</body>
+
+</html>

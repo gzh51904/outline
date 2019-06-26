@@ -235,3 +235,40 @@
     * v-bind: `v-bind:id="current"`
         * 任何属性都可以使用`v-bind:属性`
         * 专门对class和style属性进行增强,可以支持数组和对象
+
+### 面试题
+* express中如何处理请求数据
+    * get: req.query
+    * post: express.urlencoded() -> req.body
+    * 动态路由：req.params
+* 如何延迟js代码执行
+    * window.onload
+    * jQuery(function(){})
+    * document.onreadystatechange = function(){
+        if(document.readyState === 'interactive'){
+            
+        }
+    }
+    * document.addEventListener('DOMContentLoaded',function(){})
+    
+    * script标签的属性
+        * type
+        * src
+        * async（布尔值属性）：异步下载，下载完成立即执行（下载不阻塞，执行阻塞）
+        * defer（布尔值属性）：推迟js执行时间（下载和执行都不会阻塞页面代码）
+
+
+### 知识点
+* computed
+    * getter（默认）
+    * setter
+* ref
+    * 给目标元素添加Ref属性
+    * 通过实例.$refs属性获取
+    ```js
+        <button ref="btn"/>
+
+        this.$refs.btn;//获取到真实dom节点
+    ```
+* 事件修饰符
+    * v-on:keyup.13
