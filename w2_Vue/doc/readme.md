@@ -424,4 +424,51 @@
         * 什么时候需要添加key
             * v-for生成的同类型兄弟元素需要添加key
 
-* 
+### 面试题
+* 如何取消ajax
+```js
+    let xhr = new XMLHttpRequest();
+    xhr.open('get','xxx.com/xx.php',true);
+    xhr.send();
+
+    // 取消ajax请求方法
+    xhr.abort()
+```
+
+* 在Vue的created生命周期创建的定时器，销毁后还是否生效
+    * 
+
+### 知识点
+* axios & fetch
+* @vue/cli
+    * es-module
+    * 组件
+    * webpack
+    ...
+* npm script
+    * 运行格式：`npm run xxx`
+* 热更新：监听所有文件修改，并自动刷新浏览器
+
+* Vue挂载相关属性
+    * el            挂载点
+    * template      模板
+    * render        createNode用于创建虚拟节点，更加灵活去处理一些逻辑
+    * 处理过程el -> template -> render
+
+* 模块化开发
+    * commonJS  -> node.js
+    * CMD       -> sea.js
+    * AMD       -> require.js
+    * ES Module
+        * import    引入
+        * export    导出
+* 基于webpack模块化开发
+    * 兼容了commonJS与ESModule规范的模块
+* 指令与组件
+    * 指令Directive：html属性
+        * 内置指令
+        * 自定义指令
+    * 组件Component：html标签
+        * 内置组件
+        * 自定义组件
+        * vue的单文件组件

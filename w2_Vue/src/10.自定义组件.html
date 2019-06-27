@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10.自定义组件</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>10.自定义组件</h1>
+        <div id="app">
+            <goods-list></goods-list>
+            <goods-list></goods-list>
+            
+
+            <jingjing></jingjing>
+            <jingjing></jingjing>
+            
+
+            <page-list></page-list>
+        </div>
+    </div>
+    <template id="goodslist">
+        <div>
+            <h4>goodsList</h4>
+            <p>{{username}} -> {{qty}}</p>
+            <button class="btn btn-success" @click="changeQty">修改</button>
+            <laoxie></laoxie>
+        </div>
+    </template>
+    <template id="pageList">
+            <div>
+               <div class="btn-group">
+                   <button class="btn btn-outline-secondary">1</button>
+                   <button class="btn btn-outline-secondary">2</button>
+                   <button class="btn btn-outline-secondary">3</button>
+                   <button class="btn btn-outline-secondary">4</button>
+                   <button class="btn btn-outline-secondary">5</button>
+                   <button class="btn btn-outline-secondary">6</button>
+                   <button class="btn btn-outline-secondary">7</button>
+                   <button class="btn btn-outline-secondary">8</button>
+                   <button class="btn btn-outline-secondary">9</button>
+                   <button class="btn btn-outline-secondary">10</button>
+               </div>
+            </div>
+        </template>
+    <script src="js/axios.js"></script>
+    <script src="js/vue.js"></script>
+    <script type="module">
+        /**
+            10.自定义组件
+                * 全局
+                    * Vue.component(name,options)
+                * 局部
+                    * components
+ 
+            PS: 组件就是一个Vue的实例
+         */
+
+        //  全局组件
+        Vue.component('goodsList', {
+            // 与Vue实例化一致(el、data除外)
+            //  无el, data必须为函数
+            data() {
+                return {
+                    username: 'laoxie',
+                    qty: 1,
+                    datalist: []
+                }
+            },
+            template: `#goodslist`,
+            methods: {
+                changeQty() {
+                    this.qty = this.qty + 1;
+                }
+            },
+
+            // 局部组件
+            components:{
+                laoxie:{
+                    data(){
+                        return {
+                            age:18
+                        }
+                    },
+                    template:`<div>laoxie {{age}}</div>`
+                },
+            },
+            beforeCreate() {
+
+            },
+            mounted() {
+
+            }
+        });
+
+        Vue.component('pageList',{
+            data(){
+                return {}
+            },
+            template:'#pageList'
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                datalist: []
+            },
+            computed: {},
+            methods: {
+
+            },
+
+            //  局部组件
+            components: {
+                
+                jingjing:{
+                    data(){
+                        return {
+                            age:36
+                        }
+                    },
+                    template:`<div>jingjing {{age}}</div>`
+                }
+            }
+        })
+
+    </script>
+    </script>
+</body>
+
+</html>

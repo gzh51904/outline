@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>9.在vue中发起ajax请求</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>9.在vue中发起ajax请求</h1>
+        <div id="app">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">名称</th>
+                        <th scope="col">市场价</th>
+                        <th scope="col">活动价</th>
+                        <th scope="col">颜色</th>
+                        <th scope="col">尺寸</th>
+                        <th scope="col">添加时间</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(goods,idx) in goodslist">
+                        <th scope="row">{{idx+1}}</th>
+                        <td>{{goods.name}}</td>
+                        <td><del>{{(goods.price*1).toFixed(2)}}</del></td>
+                        <td>{{(goods.price*0.8).toFixed(2)}}</td>
+                        <td>{{goods.color}}</td>
+                        <td>{{goods.size}}</td>
+                        <td>{{goods.createTime}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary">编辑</button>
+                                <button class="btn btn-outline-danger">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/axios.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            9.在vue中发起ajax请求
+                * 原生js
+                * jquery
+                * axios & fetch
+
+         */
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                goodslist: []
+            },
+            // template:`<div>div</div>`,
+            // render(createNode){
+            //     // createNode用于创建虚拟节点，更加灵活去处理一些逻辑
+            //     return  createNode('h4',{title:'标题',class:'title'},'文章标题')
+            // },
+            async created() {
+                let { data } = await axios.get('http://localhost:1904/goods');
+
+                console.log(data)
+                this.goodslist = data.data;
+            }
+        });
+
+    </script>
+    </script>
+</body>
+
+</html>
