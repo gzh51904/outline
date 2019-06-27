@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8.Vue的生命周期</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>8.Vue的生命周期</h1>
+        <div id="app">
+            {{username}}
+        </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+            8.Vue的生命周期
+                * 生命周期的定义
+                    * 创建 -> 删除
+                    * 实例化 -> 销毁
+                * 过程
+                    * 生命周期函数（钩子函数）：在不同的阶段执行的操作
+                        * 创建阶段
+                            * beforeCreate
+                            * created
+                        * 挂载阶段
+                            * beforeMount
+                            * mounted
+                        * 更新阶段
+                            * beforeUpdate
+                            * updated
+                        * 销毁阶段
+                            * beforeDestroy
+                            * destroyed
+                * 销毁
+                    * vm.$destroy()
+                        完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。触发 beforeDestroy 和 destroyed 的钩子
+
+         */
+
+         let vm = new Vue({
+            //  el:'#app',
+             data:{
+                 username:'laoxie'
+             },
+
+            //  生命周期函数
+            beforeCreate(){
+                // 输出分组
+                console.group('Create')
+                    console.group('beforeCreated')
+                        console.log('data:',this.$data)
+                        console.log('el:',this.$el)
+                    console.groupEnd()
+            },
+            created(){
+                    console.group('created')
+                        console.log('data:',this.$data)
+                        console.log('el:',this.$el)
+                    console.groupEnd()
+                console.groupEnd();
+            },
+            beforeMount(){
+                console.group('Mount')
+                    console.group('beforeMount')
+                        console.log('data:',this.$data)
+                        console.log('el:',this.$el)
+                    console.groupEnd();
+            },
+            mounted(){
+                    console.group('Mounted')
+                        console.log('data:',this.$data)
+                        console.log('el:',this.$el)
+                    console.groupEnd();
+                console.groupEnd();
+            },
+            beforeUpdate(){
+                console.group('Update')
+                    console.group('beforeUpdate')
+                        console.log('data:',this.username)
+                        console.log('el:',this.$el)
+                console.groupEnd()
+            },
+            updated(){
+                    console.group('updated')
+                        console.log('data:',this.username)
+                        console.log('el:',this.$el)
+                    console.groupEnd()
+                console.groupEnd();
+            },
+            beforeDestroy(){
+                console.group('Destroy')
+                console.log('beforeDestroy')
+            },
+            destroyed(){
+                console.log('destroyed')
+                console.groupEnd();
+            }
+         })
+
+        // 手动挂载（灵活性更高）
+        vm.$mount('#app')
+
+    </script>
+    </script>
+</body>
+
+</html>

