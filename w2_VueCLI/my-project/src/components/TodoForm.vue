@@ -3,11 +3,13 @@
       <input type="text" class="form-control" v-model="title" ref="title" v-on:keyup.13="addhandle">
       <div class="input-group-append">
         <input type="date" v-model="date" class="border">
-        <button class="btn btn-success" type="button" v-on:click="addhandle">添加</button>
+        <!-- <button class="btn btn-success" type="button" v-on:click="addhandle">添加</button> -->
+        <TodoButton class="btn btn-success" @click.native="addhandle">添加</TodoButton>
       </div>
     </div>
 </template>
 <script>
+import TodoButton from './TodoButton.vue';
 export default {
     props:['add'],
     data(){
@@ -47,6 +49,9 @@ export default {
             this.$refs.title.focus();
             this.title = ''
         }
+    },
+    components:{
+        TodoButton
     }
 }
 </script>

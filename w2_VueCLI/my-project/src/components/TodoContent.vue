@@ -1,66 +1,37 @@
 <template>
   <div class="todo-content">
-    <table class="table mt-3">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">待办事项</th>
-          <th scope="col">预期时间</th>
-          <th scope="col">是否完成</th>
-          <th scope="col">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item,idx) in weilist" :key="idx">
-          <th scope="row">{{idx+1}}</th>
-          <td>{{item.title}}</td>
-          <td>{{item.date}}</td>
-          <td>{{item.done?'是':'否'}}</td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <button class="btn btn-outline-primary" @click="complete(item.id)">完成</button>
-              <button class="btn btn-outline-danger" @click="remove(item.id)">删除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table mt-3">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">完成事项</th>
-          <th scope="col">完成时间</th>
-          <th scope="col">是否完成</th>
-          <th scope="col">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item,idx) in donelist" :key="idx">
-          <th scope="row">{{idx+1}}</th>
-          <td>{{item.title}}</td>
-          <td>{{item.date}}</td>
-          <td>{{item.done?'是':'否'}}</td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <button class="btn btn-outline-primary">查看</button>
-              <button class="btn btn-outline-danger" @click="remove(item.id)">删除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <TodoDatalist :data="weilist"/>
+    <TodoDatalist :data="donelist"/>
     <div class="status">总共：{{todolist.length}}，待办：{{weilist.length}}，完成:{{donelist.length}}</div>
+    <!-- <button @click="$emit('update:qty',++num)">改变数量</button> -->
   </div>
 </template>
 <script>
+import TodoDatalist from './TodoDatalist.vue';
+
 export default {
     // 接收属性：props属性等效于直接在data中写属性
     // props,data,computed 公用命名空间
-    props:['todolist','remove','complete'],
+    // props:['todolist','remove','complete'],
+    // props:['todolist'],
+
+    // 数据类型校验
+    props:{
+        todolist:{
+            type:Array,
+            required:true
+        },
+        qty:{
+            type:[Number,String],
+            required: true,  // 这个属性qty为必须属性，如果不传递则报错
+            validator(value){
+                return value>=5 && value<=10
+            }
+        }
+    },
     data(){
         return {
-          
+          num:10
         }
     },
     computed:{
@@ -70,6 +41,9 @@ export default {
         donelist(){
             return this.todolist.filter(item=>item.done)
         }
+    },
+    components:{
+        TodoDatalist
     }
 }
 </script>
