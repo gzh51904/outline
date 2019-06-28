@@ -472,3 +472,107 @@
         * 内置组件
         * 自定义组件
         * vue的单文件组件
+
+## day2-5
+
+### 面试题
+* Vue在哪个阶段把data属性变成响应式属性
+    * beforeCreate和created之间
+* Vue的实例化过程做了哪些操作
+    * 最快能在哪个生命周期函数操作数据
+    * 最快能在哪个生命周期函数操作节点
+* NodeJS中如何操作MongoDB
+    * 驱动：mongodb & mongoose
+* 点餐系统如何实时显示订单状态
+    * websocket
+
+### 复习
+* VirtualDOM
+    * diff算法 -> 对比前后状态 -> 差异 -> 更新
+* 组件（组件就是Vue的实例）
+    * 定义
+        * 全局：Vue.component(name,options)
+            * options:与Vue实例化配置参数一致
+                * 无el
+                * data必须为函数：复用
+        * 局部
+            * components:{name:options,name:options...}
+    * 单文件组件(.vue)
+        * template
+        * script
+        * style
+    * @vue/cli Vue脚手架
+        * webpack
+        * 兼容
+        * ...
+        ```js
+            import vue from 'vue';// 去node_modules中查找
+        ```
+* ESModule（模块对象：模块都是局部作用域）
+    * import
+    * export
+    ```js
+        // export let const var function class {} default
+
+        import {xxx as a} from 'xxx'
+        import a from 'xxx'
+    ```
+* axios
+    * 发起ajax请求，基于promise
+    ```js
+        axios({
+            method:'delete',
+            url:'xxx'
+        })
+
+        axios.get('xxx',{
+            params:{
+                a:10,
+                b:20
+            }
+        })
+        axios.post('xxx',{a:10,b:20})
+        axios.put('xxx')
+        axios.delete('xxx')
+
+    ```
+
+### 知识点
+* npm script
+    * start
+    * test
+        * 单元测试:mocha
+        * 端对端测试
+        ```js
+        // 封装common.js
+            function getData(10){
+                return 10**2
+            }
+
+            // 单元测试 test.js
+            QUnit.test( "hello test", function( assert ) {
+                assert.ok( getData(4)===10, "getData function Passed!" );
+            });
+        ```
+    * 运行
+    ```bash
+        npm run xxx
+
+        npm start;
+        npm test;
+    ```
+* 组件通讯
+    * 父 -> 子
+        * props
+            * 定义属性
+            * 接收属性
+        * 缺点
+            * 复杂的结构需要逐层传递
+    * 子 -> 父
+        * 传递事件处理函数
+    * 注意事项
+        * 状态提升：两个组件如果需要操作同一个数据，应该把数据放到他们共同的父级组件
+        * 单向数据流数修改方式：谁的数据谁修改（数据在哪个组件就在哪个组件内定义修改方式）
+* 数据流：数据的传输方式
+    * 单向数据流：数据只允许从父组件出入子组件
+    * 双向数据流：angularJS

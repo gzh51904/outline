@@ -1,20 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+  <div class="container-fluid">
     <h1>HTML5 1904</h1>
-    <Home/>
+    <TodoList/>
   </div>
 </template>
 
 <script>
-
+import 'bootstrap/dist/css/bootstrap.css';
 // 引入其他页面
-import Home from './pages/Home.vue';
+// import Home from './pages/Home.vue';
+import TodoList from './components/TodoList.vue';
 
 export default {
   name: 'app',
   components:{
-    Home
+    // Home,
+    TodoList
   }
 }
 </script>
