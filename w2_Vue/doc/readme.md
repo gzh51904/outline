@@ -663,7 +663,9 @@
                 // 接收方：B
                 Bus.$on('getdata',(num)=>{})
             ```
-    
+
+### 知识点
+
 * 内容传输
     > <slot></slot>
     * 命名插槽（外->内）
@@ -678,3 +680,33 @@
             * string（组件名）
             * ComponentDefinition（组件配置参数）
             * ComponentConstructor（组件）
+
+### 面试题
+* 如何给定义的组件绑定事件
+```js
+    <my-button v-on:click.native="handler">编辑</my-button>
+
+    myButton = {
+        //props:['click']
+        template:`<button><slot/><button>`
+    }
+```
+* 组件数据data为什么必须是函数
+    * js中对象为引用数据类型
+    * 复用
+* 数据校验
+    * 必须要求是数字
+    ```js
+        <my-button v-bind:price="100"></my-button>
+        <my-button v-bind:style="{color:'#f00',fontSize:'12px'}">{{}}</my-button>
+    ```
+
+### 知识点
+* 内置组件
+    * keep-alive ： 缓存非活动组件
+
+    * 动画
+        * transition
+        * transition-group
+
+        * 什么是进入/离开状态

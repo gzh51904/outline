@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>14.过渡动画transition</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        /* 进入状态 */
+        .v-enter{opacity:0;width:184px}
+        .v-enter-to{opacity:1;width:300px}
+        .v-enter-active{transition:opacity,width 5s;}
+
+
+        .fade-enter{opacity:0;}
+        .fade-enter-to{opacity:1;}
+        .fade-enter-active{transition:opacity 5s;}
+
+
+        /* 离开状态 */
+        .v-leave{width:300px}
+        .v-leave-to{width:184px}
+        .v-leave-active{transition:width 5s;}
+
+        .fade-leave{opacity:1;}
+        .fade-leave-to{opacity:0;}
+        .fade-leave-active{transition:opacity 5s;}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>14.过渡动画transition</h1>
+        <div id="app">
+            <button class="btn btn-success" @click="showhide">显示/隐藏</button>
+            <div>
+                <transition-group 
+                name="fade"
+                enter-active-class="fadeInDown"
+                leave-active-class="fadeOutDown"
+                >
+                    <img src="img/g2.jpg" key="2" v-show="display" class="animated"/>
+                    <img src="img/g1.jpg" key="1" v-show="display" class="animated"/>
+                </transition-group>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/vue.js"></script>
+    <script>
+
+        let vm  = new Vue({
+            el:'#app',
+            data:{
+                
+                display:true
+            },
+            methods:{
+                showhide(){
+                    this.display = !this.display;
+                }
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

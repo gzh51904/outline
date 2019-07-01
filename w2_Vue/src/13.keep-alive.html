@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>13.keep-alive</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>13.keep-alive</h1>
+        <div id="app">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" v-for="item in navs" @click="changeNav(item.name)">
+                    <a class="nav-link" href="#" :class="{active:item.name.toLowerCase() == active}">{{item.title}}</a>
+                </li>
+            </ul>
+            <keep-alive>
+                <component :is="active"></component>
+            </keep-alive>
+        </div>
+    </div>
+    
+    <script src="js/vue.js"></script>
+    <script>
+
+        let vm  = new Vue({
+            el:'#app',
+            data:{
+                navs:[{
+                    title:'首页',
+                    name:'Home',
+                    path:'/home'
+                },{
+                    title:'发现',
+                    name:'Discover',
+                    path:'/discover'
+                },{
+                    title:'我的',
+                    name:'disMine',
+                    path:'/mine'
+                }],
+                active:'home'
+            },
+            methods:{
+                changeNav(name){
+                    this.active = name.toLowerCase();
+                }
+            },
+            created(){
+                // 设置导航对应的组件
+                let components = {}
+                this.navs.forEach(item=>{
+                    // 设置全局组件
+                    let componentName = item.name.toLowerCase();
+                    components[componentName] = {
+                        // name:componentName,
+                        data(){
+                            return {
+                                price:998,
+                                componentName
+                            }
+                        },
+                        template:`<div>
+                            ${item.title} -${item.name}
+                            <p>价格：{{price}}</p>
+                            <button class="btn btn-warning" @click="changePrice">修改价格</button>
+                       </div>`,
+                        methods:{
+                            changePrice(){
+                                this.price = this.price+1
+                            }
+                        },
+                        activated(){
+                            console.log('activated',this.componentName)
+                        },
+                        deactivated(){
+                            console.log('deactivated',this.componentName)
+                        },
+                        created(){
+                            console.log('created',this.componentName)
+                        },
+                        beforeDestroy(){
+                            console.log('beforeDestroy',this.componentName)
+                        }
+                    }
+                });
+
+                // 后期设置Vue组件的配置参数
+                // 注意：避免直接重置$options.components，因为Vue内部内置了一些组件，如keep-alive
+                // this.$options.components = components;// keep-alive报错
+                Object.assign(this.$options.components,components);
+                // this.$options.components = {...this.$options.components,...components}
+
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
