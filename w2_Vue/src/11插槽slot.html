@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11插槽slot</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>11插槽slot</h1>
+        <div id="app">
+            <my-nav>
+                <!-- 默认情况下：组件内容会被忽略，组件模板必须使用slot来放置这里的内容 -->
+                <template v-slot:title>页面主导航{{mytitle.active}}</template>
+                <template v-slot:default="obj">
+                    <ul>
+                        <li v-for="nav in navs" :key="nav.name" v-bind:class="{current:obj.active==nav.name}">{{nav.title}}</li>
+                    </ul>
+                </template>
+            </my-nav>
+        </div>
+    </div>
+    <template id="myNav">
+        <div clas="main-nav">
+            <!-- name属性：给插槽命名（默认：default） -->
+            <h4><slot name="title" v-bind:active="active"></slot></h4>
+            <slot :active="active" username="laoxie"></slot>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+
+        let vm  = new Vue({
+            el:'#app',
+            data:{
+                navs:[{
+                    title:'首页',
+                    name:'Home',
+                    path:'/home'
+                },{
+                    title:'发现',
+                    name:'Discover',
+                    path:'/discover'
+                },{
+                    title:'我的',
+                    name:'Mine',
+                    path:'/mine'
+                }]
+            },
+            components:{
+                myNav:{
+                    data(){
+                        return {
+                            active:'Discover'
+                        }
+                    },
+                    template:`#myNav`
+                }
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

@@ -618,3 +618,63 @@
           return val>=60
         }
     ```
+
+
+## day3-1
+
+### 面试题
+* 子组件最先能在哪个生命周期函数中获取到props
+    * created
+
+
+### 复习
+* 组件通讯
+    * 父 -> 子 ： props
+        * 定义
+            * 只定义不接受，会自动成组件根节点属性
+        * 接收
+            * 校验
+                * 必填：required
+                * 默认值：default
+                * 自定校验：validator
+    * 子 -> 父
+        > 谁的数据谁修改的原则（状态提升）
+        * 把处理函数传入子组件，并在子组件执行
+        * 自定事件+$emit
+            ``` <Component v-on:xxx="handle"/>
+        * sync修饰符
+            1. 父组件：v-bind:xxx.sync
+            2. 子组件：$emit('update:xxx')
+    * 兄弟
+        * 兄弟 -> 父
+        * 父 -> 兄弟
+    * 复杂组件通讯
+        * Bus：vue实例可以绑定和触发事件
+            * vm.$on('xxx',handle)  
+            * vm.$emit('xxx',xx)
+
+            ```js
+                const Bus = new Vue();
+
+                // 把数据从 A -> B
+                // 发送方：A
+                Bus.$emit('getdata',100)
+
+                // 接收方：B
+                Bus.$on('getdata',(num)=>{})
+            ```
+    
+* 内容传输
+    > <slot></slot>
+    * 命名插槽（外->内）
+        * name="xxx"
+        * v-slot:xxx
+            > v-slot只能应用在template或组件中
+    * 作用域插槽（内 -> 外）
+        * 
+* 内置组件
+    * component
+        * is: 
+            * string（组件名）
+            * ComponentDefinition（组件配置参数）
+            * ComponentConstructor（组件）

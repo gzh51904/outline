@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>12动态组件</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>12动态组件</h1>
+        <div id="app">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" v-for="item in navs" @click="changeNav(item.name)">
+                    <a class="nav-link" href="#" :class="{active:item.name.toLowerCase() == active}">{{item.title}}</a>
+                </li>
+            </ul>
+            <component :is="active"/>
+        </div>
+    </div>
+    
+    <script src="js/vue.js"></script>
+    <script>
+
+        let vm  = new Vue({
+            el:'#app',
+            data:{
+                navs:[{
+                    title:'首页',
+                    name:'Home',
+                    path:'/home'
+                },{
+                    title:'发现',
+                    name:'Discover',
+                    path:'/discover'
+                },{
+                    title:'我的',
+                    name:'Mine',
+                    path:'/mine'
+                }],
+                active:'home'
+            },
+            components:{
+            },
+            methods:{
+                changeNav(name){
+                    this.active = name.toLowerCase();
+                }
+            },
+            created(){
+                // 设置导航对应的组件
+                let components = {}
+                this.navs.forEach(item=>{
+                    // 设置全局组件
+                    components[item.name.toLowerCase()] = {
+                        template:`<div>${item.title} -${item.name}</div>`
+                    }
+                });
+
+                // 后期设置Vue组件的配置参数
+                this.$options.components = components;
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
