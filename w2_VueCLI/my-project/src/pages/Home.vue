@@ -21,6 +21,10 @@ export default {
         changeAge(){
             this.age = this.age + 1;
         }
+    },
+    created(){
+        // 使用VueRouter
+        // 在任意组件中通过 this.$router
     }
 }
 </script>
