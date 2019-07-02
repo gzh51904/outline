@@ -174,4 +174,76 @@
         * \n\r
 * VueRouter使用步骤
 
+
+### 面试题
+
+* 如何在子组件获取父组件的数据
+    * 父->子
+        * props
+        * this.$parent.$options
+* 如何子父组件中获取子组件的数据
+    * this.$children[0]
+    * this.$refs.xxx
+
+    ```js
+       
+        Vue.component('myForm',{
+            template:`<div>
+                <h4 ref="title">获取子组件数据</h4>
+                <Button ref="btn"></Button>
+            </div>`,
+            mounted(){
+                //this.$refs.title
+
+                this.$children[0];
+                this.$refs.btn;
+
+                this.$root;//获取根组件（_uid为0的组件）
+            }
+        })
+
+         let vm = new Vue({});
+    ```
+* Vue中data,computed,methods的异同
+    * 共用命名空间
+    * data和computed都为属性，methods为方法
+        * computed具有缓存能力
+        ```js
+            new Vue({
+                data:{
+                    goodslist:[]
+                },
+                computed:{
+                    saleGoods(){
+                        return this.goodslist.map(item=>{
+                            item.price = item.price*0.8;
+                            return item;
+                        })
+                    }
+                },
+                methods:{
+                    sale(){
+                        return this.goodslist.map(item=>{
+                            item.price = item.price*0.8;
+                            return item;
+                        })
+                    }
+                }
+            })
+            {{goodslist}} {{saleGoods}} {{sale()}}
+        ```
+
+
+### 知识点
+* hash路由的原理
+    * hash的修改触发组件的渲染
+    ```js
+        window.onhashchange = function(){
+            // 根据不同hash值渲染不同的组件
+        }
+    ```
+
 * elementUI
+    * 引入方法
+        * 完整引入
+        * 按需引入

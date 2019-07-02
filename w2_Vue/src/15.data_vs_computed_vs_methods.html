@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>15.data_vs_computed_vs_methods</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="p-5">
+        <h4>username:{{username}}</h4>
+        <p>rusername:{{rusername}}</p>
+        <p>data: {{date}}</p>
+        <p>computed: {{cdate}}</p>
+        <p>methods: {{mdate()}}</p>
+    </div>
+    <script>
+        /**
+            * 共同点
+                * 公用命名空间
+            * 不同点
+                * data,computed为属性，methods为方法
+            * computed
+                * 具有缓存的特性
+                    * 合理利用computed，可以优化页面性能
+                * 根据所依赖的数据改变而改变
+        */
+
+        let vm = new Vue({
+            el:'#app',
+
+            // 初始化数据
+            data:{
+                username:'jingjing',
+                date:Date.now()
+            },
+
+            // 复杂计算使用computed
+            computed:{
+                cdate(){
+                    return Date.now();
+                },
+                rusername(){
+                    return this.username.split('').reverse().join('');
+                }
+            },
+
+            // 方法
+            methods:{
+                mdate(){
+                    return Date.now();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
