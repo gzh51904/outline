@@ -247,3 +247,62 @@
     * 引入方法
         * 完整引入
         * 按需引入
+
+## day3-3
+
+### 面试题
+* 如何下线在同类型设备中登录的账号
+    * socket
+        * websocket
+        * socket.io
+### 复习
+* Vue-router
+    * 模式
+        * hash（开发，默认）
+        * history（上线）
+    * 步骤
+        1、引入Vue,VueRouter
+        ```js
+            VueRouter = {install:function(Vue){
+                Vue.component('xxxx');
+                //....
+            }}
+        ```
+        2、安装： Vue.use()
+        3、实例化（配置参数）
+        4、注入
+        5、使用this.$router
+    * 显示 `<router-view/>`
+    * 导航
+        * 声明式导航 `<router-link/>`
+            * to
+        * 编程式导航
+* UI
+    * elementUI
+    * mintUI
+* 按需加载
+    * babel-plugin-import
+
+
+### 知识点
+* sass与less的支持
+    * lang
+* css局部样式和模块化
+    * scoped
+    * module
+    
+* 编程式导航
+    * $router 路由实例
+        * push()
+        * replace('/login') // 等效于 <router-link to="/login" replace>
+    * $route 当前路由信息
+        * params
+        * query
+* 动态路由
+    * 复用原则
+* 路由传参
+    * 定义时传参
+        * props
+    * 跳转时传参
+        * params
+        * query

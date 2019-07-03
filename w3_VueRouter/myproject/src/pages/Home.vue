@@ -14,3 +14,11 @@ Vue.use(Carousel);
 Vue.use(CarouselItem);
 export default {};
 </script>
+
+<style scoped>
+/* scoped：局部样式
+  原理：通过给元素添加随机的hash编码，并设置css属性来实现
+ */
+  a{color:#f00 !important}
+</style>
+

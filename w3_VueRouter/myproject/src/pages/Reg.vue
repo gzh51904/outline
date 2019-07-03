@@ -1,12 +1,10 @@
 <template>
     <div>
-        购物车
+        注册
     </div>
 </template>
 <script>
 export default {
-    created(){
-        console.log('Cart:',this)
-    }
+    
 }
 </script>

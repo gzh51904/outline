@@ -1,12 +1,13 @@
 <template>
     <div>
-        购物车
+        登录
     </div>
 </template>
 <script>
 export default {
+    props:['a'],
     created(){
-        console.log('Cart:',this)
+        console.log('Login:',this.$route)
     }
 }
 </script>
