@@ -306,3 +306,17 @@
     * 跳转时传参
         * params
         * query
+
+### 面试题
+* SSR & BSR
+    * 是什么
+    * 优缺点
+* 如何理解前端开发
+    * 做页面
+
+### 知识点
+* 动态路由
+    * watch
+    * beforeRouteUpdate
+* Vue引入版本控制
+    * vue.config.js
