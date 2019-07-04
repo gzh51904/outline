@@ -28,6 +28,7 @@
     
     <!-- 路由配置匹配后，渲染对应的组件到router-view -->
     <router-view/>
+    <router-view name="bottom"/>
   </div>
 </template>
 
@@ -47,7 +48,7 @@ import Vue from "vue";
 // Vue.use(MenuItem);
 
 // 基于babel-plugin-component的按需加载
-import { Menu, MenuItem, Row,Col,Link,Container,Header,Aside,Main} from "element-ui";
+import { Menu, MenuItem, Row,Col,Link,Container,Header,Aside,Main,Form,FormItem,Button,Input} from "element-ui";
 Vue.use(Menu);
 Vue.use(MenuItem);
 Vue.use(Row);
@@ -57,6 +58,10 @@ Vue.use(Container);
 Vue.use(Header);
 Vue.use(Aside);
 Vue.use(Main);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Button);
+Vue.use(Input);
 
 export default {
   name: "app",

@@ -320,3 +320,59 @@
     * beforeRouteUpdate
 * Vue引入版本控制
     * vue.config.js
+
+## day3-4
+
+### 面试题
+* MongoDB & MySQL
+* VirtualDOM
+    * diff算法
+
+### 复习
+* 编程式导航
+    * this.$router
+        * push({name:'Home'})        有浏览记录
+        * replace()     无浏览记录
+    * this.$route
+        * 当前路由信息
+* 路由传参
+    * 定义
+        * 动态路由
+            * watch
+        ```js
+            new Vue({
+                //...
+                watch:{
+                    //监听实例属性
+                    num:function(to,from){
+                        // 当实例属性num有修改时触发这个函数
+                    },
+                    $route:function(to,from){
+                        // 监听到动态路由的改变
+                    }
+                },
+
+                beforeRouteUpdate(to,from,next){
+                    // 权限管理：当前页面必须从某个页面跳转过来才能跳转
+                    if(from.path == '/home'){
+                        next();
+                    }
+                }
+            })
+        ```
+        * props
+            * Object
+            * Function
+            * Boolean
+    * 跳转
+        * query
+        * params （必须name跳转方式）
+* 嵌套路由
+    * <router-view>
+    ```js
+        <router-view/>
+
+    ```
+* 命名视图
+    `<router-view name="header"/>`
+    * 多个路由视图必须给router-view命名，路由定义是必须使用components

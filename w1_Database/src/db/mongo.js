@@ -108,7 +108,7 @@ exports.find = (colName,query,{limit,skip,sort}={})=>{
 
         res = await res.toArray();
         
-        resolve(result);
+        resolve(res);
 
         client.close();
     })

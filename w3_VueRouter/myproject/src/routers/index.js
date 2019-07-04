@@ -35,7 +35,13 @@ let router = new VueRouter({
         {
             name: 'Home',
             path: '/home',//当浏览器地址为#/home时，渲染Home组件
-            component: Home
+            //component: Home,
+
+            // 多路由视图的处理
+            components:{
+                default:Home,
+                bottom:{template:'<h4>Bottom</h4>'}
+            }
         },
         // 重定向
         {
