@@ -18,9 +18,10 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+
 export default {
   data() {
+      
     //   自定义校验规则
     let validatePass = (rule, value, callback) => {
       callback();
@@ -66,7 +67,7 @@ export default {
         if (valid) {
             // 验证通过，发请求到后端，保存用户名到数据库
             let {username,password} = this.ruleForm;
-            this.$axios.post('http://localhost:1904/reg',{
+            this.$axios.post('/reg',{
                 username,
                 password
             }).then(({data})=>{

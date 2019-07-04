@@ -20,9 +20,12 @@
       <el-menu-item v-for="item in pages" :key="item.name" :index="item.path">{{item.title}}</el-menu-item>
     </el-menu>
       </el-col>
-      <el-col :span="6" class="login">
+      <el-col :span="6" class="login" v-if="!logined">
          <el-link href="#" @click.native.prevent.stop="goto('Reg')">注册</el-link>
          <el-link href="#" @click.native.prevent.stop="goto('Login')">登录</el-link>
+      </el-col>
+      <el-col :span="6" class="login" v-else>
+        <el-link href="#" @click.native.prevent.stop="logout()">退出</el-link>
       </el-col>
     </el-row>
     
@@ -89,7 +92,8 @@ export default {
           name: "Mine"
         }
       ],
-      active: "/home"
+      active: "/home",
+      logined:false,
     };
   },
   methods: {
@@ -106,6 +110,10 @@ export default {
         query:{username:'jingjing',psw:1234},
         params:{a:100,b:200} //params只能通过name方式跳转时传参
       })
+    },
+    logout(){
+      this.logined = false;
+      localStorage.removeItem('username');
     }
   },
   created() {
@@ -113,6 +121,9 @@ export default {
     // 刷新保持高亮效果
     let hash = window.location.hash.slice(1);
     this.active = hash;
+
+    let username = localStorage.getItem('username');console.log('username',username)
+    this.logined = username ? true : false;
   }
 };
 </script>

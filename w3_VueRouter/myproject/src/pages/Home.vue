@@ -12,7 +12,20 @@ import Vue from 'vue';
 import {Carousel,CarouselItem} from 'element-ui';
 Vue.use(Carousel);
 Vue.use(CarouselItem);
-export default {};
+export default {
+    beforeRouteEnter(to,from,next){
+        console.log('Home: beforeRouteEnter');
+        next();
+    },
+    beforeRouteUpdate(to,from,next){
+        console.log('Home: beforeRouteUpdate');
+        next();
+    },
+    beforeRouteLeave(to,from,next){
+        console.log('Home: beforeRouteLeave');
+        next();
+    }
+};
 </script>
 
 <style scoped>

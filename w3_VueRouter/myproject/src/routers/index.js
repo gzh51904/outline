@@ -111,10 +111,15 @@ let router = new VueRouter({
             name: 'Cart',
             path: '/cart',
             component: Cart,
+            meta: { requiresAuth: true },
 
             //等效于<Cart username="laoxie"/>
             props: {
                 username: 'laoxie'
+            },
+            beforeEnter(to,from,next){
+                console.log('Cart路由独享：beforeEnter')
+                next();
             }
 
 
@@ -122,7 +127,9 @@ let router = new VueRouter({
         {
             name: 'Mine',
             path: '/mine',
-            component: Mine
+            component: Mine,
+            // 本组件需要登录权限才可访问
+            meta: { requiresAuth: true }
         },
         {
             name: 'Login',
@@ -149,5 +156,36 @@ let router = new VueRouter({
 
     ]
 });
+
+// 全局路由守卫
+// 所有的路由切换都会执行，
+router.beforeEach((to,from,next)=>{
+    console.log('全局：beforeEach',to);
+    // 判断目标路由是否需要登录权限才可访问
+    if(to.matched.some(item=>item.meta.requiresAuth)){
+        let username = localStorage.getItem('username');
+
+        // 用户已登录
+        if(username){
+            next();
+        }
+
+        // 用户未登录
+        else{
+            next({
+                path:'/login',
+                query:{
+                    redirectTo:to.fullPath
+                }
+            })
+        }
+    }else{
+        next();
+    }
+})
+
+router.afterEach((to,from)=>{
+    console.log('全局：afterEach');
+})
 
 export default router;
