@@ -394,3 +394,120 @@
         * 每个路由的守卫，写在路由配置中
     * 组件内的守卫
         * 类似与组件生命周期函数，写在组件配置中
+
+
+## day3-5
+
+### 面试题
+* 依赖请求：promise.all()
+```js
+    // 第5个请求，依赖前4个请求的数据
+    let p1 = new Promise((resolve)=>{
+
+        let xhr1 = new XMLHttpRequest();
+        xhr1.onload = ()=>{
+            resolve(xhr1.responseText)
+        }
+    })
+
+    let p2 = new Promise((resolve)=>{
+
+        let xhr2 = new XMLHttpRequest();
+        xhr2.onload = ()=>{
+            resolve(xhr2.responseText)
+        }
+    })
+    
+    let p3 = new Promise((resolve)=>{
+
+        let xhr3 = new XMLHttpRequest();
+        xhr3.onload = ()=>{
+            resolve(xhr3.responseText)
+        }
+    })
+
+    let p4 = new Promise((resolve)=>{
+
+        let xhr4 = new XMLHttpRequest();
+        xhr4.onload = ()=>{
+            resolve(xhr4.responseText)
+        }
+    })
+
+    // await p1
+    // await p2
+    // await p3
+    // await p4
+
+    // 把p1,p2,p3,p4包装成一个promise对象
+    // 只有这4个promise对象的状态都为Resolved时，它才是Resolved
+    Promise.all([p1,p2,p3,p4]).then(res=>{
+        // res就是前4个promise对象的返回值数组
+        let xhr5 = new XMLHttpRequest();
+    });
+
+    // 竞速：把p1,p2,p3,p4包装成一个promise对象
+    // 只要有一个promise对象的状态改成Resolved，它的状态就是Resolve
+    Promise.race([p1,p2,p3,p4]).then(res=>{
+        // res就是请求最快的返回结果
+       
+    });
+
+    //...
+
+    Promise.resolve(obj);//把obj包装成一个promise对象，并把状态改成Resolved
+    Promise.reject(obj);//把obj包装成一个promise对象，并把状态改成Rejected
+
+```
+
+### 知识点
+* 路由守卫
+    * 路由跳转过程
+    * 全局
+        * beforeEach(fn)
+            * to
+            * from
+            * next
+        * afterEach(fn)
+            * to
+            * from
+    * 组件独享的
+        * beforeEnter
+    * 组件内路由守卫
+        * beforeRouteEnter()
+        * beforeRouteUpdate(fn)
+        * beforeRouteLeave(fn)
+* 权限管理
+    * beforeEach(fn)
+
+### 知识点
+* token 令牌（加密后的字符串）
+    * 原理
+        * 加密（生成）
+        * 解密（校验）
+    * 使用过程
+        1. 登录
+        2. 后端校验用户名和密码
+            * 通过：则生成一个token，并返回客户端
+        3. 客户端接收到token，并保存在客户端
+        4. 客户端每一次请求都要携带token，发送给后端进行校验
+            * 通过：保持当前状态
+            * 不通过：退回登录页面
+                * token被伪造
+                * 过期
+* 请求拦截
+    > 在请求发出去之前进行拦截操作
+    * 添加请求头
+* 响应拦截
+    > 请求回来后，then之前进行拦截操作
+    
+
+* 二进制
+```js
+    00000000 -> 256(2**8)
+
+    a -> 97 -> 01100001
+
+    00000000 01100001 01100001
+
+```

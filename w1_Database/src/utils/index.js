@@ -1,3 +1,5 @@
+const token = require('./token');
+
 exports.formatData = (obj={})=>{
     // code: 1000=>成功，250=>失败
     let {data=[],code=1000,msg='success'} = obj;
@@ -12,3 +14,6 @@ exports.formatData = (obj={})=>{
         msg
     }
 }
+
+exports.token = token;//{create,verify}
+

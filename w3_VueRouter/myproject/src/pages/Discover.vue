@@ -72,6 +72,10 @@ export default {
     if (this.$route.params.category) {
       this.cat = this.$route.params.category;
     }
+
+    this.$axios.get('/goods').then(res=>{
+      console.log('res:',res)
+    })
   }
 };
 </script>

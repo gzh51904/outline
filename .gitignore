@@ -1,5 +1,6 @@
 ﻿#过滤文件夹
 node_modules/
+w3_VueRouter/myproject/src/assets/img/
 
 #过滤文件
 .zip

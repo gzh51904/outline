@@ -6,6 +6,8 @@ const goodsRouter = require('./goods');
 const regRouter = require('./reg');
 const loginRouter = require('./login');
 
+const {formatData,token:{verify}} = require('../utils');
+
 
 Router.use(express.urlencoded({extended:false}),express.json());
 
@@ -24,19 +26,29 @@ Router.use((req,res,next)=>{
         idx = i;
         return item.includes(req.headers.origin)
     });
-    if(has){
-        res.header("Access-Control-Allow-Origin", allowOrigin[idx]);
+    // if(has){
+        res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
         res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    }
+    // }
 
     // 跨域请求CORS中的预请求
     // OPTIONS:预请求(当跨域请求为复杂请求时,浏览器自动发起,目的是询问服务器是否支持这样的跨域请求)
     if(req.method=="OPTIONS") {
         res.sendStatus(200);/*让options请求快速返回*/
     } else{
-        next();
+        // 校验token
+        // 成功：放行
+        // 失败：
+        let token = req.headers.authorization;console.log('mytoken:',token)
+        if(token && !verify(token)){
+            res.send(formatData({code:401,msg:'unauthorized'}))
+        }else{
+            next();
+        }
     }
+
+    
 })
 
 // 数据接口

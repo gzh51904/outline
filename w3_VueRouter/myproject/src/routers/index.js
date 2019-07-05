@@ -163,10 +163,10 @@ router.beforeEach((to,from,next)=>{
     console.log('全局：beforeEach',to);
     // 判断目标路由是否需要登录权限才可访问
     if(to.matched.some(item=>item.meta.requiresAuth)){
-        let username = localStorage.getItem('username');
+        let token = localStorage.getItem('Authorization');
 
         // 用户已登录
-        if(username){
+        if(token){
             next();
         }
 

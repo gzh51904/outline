@@ -50,13 +50,14 @@ export default {
                     username,
                     password
                 }
-            }).then(({data})=>{
-                console.log(data);
+            }).then((res)=>{
+                let {data,headers} = res
+                console.log(res);
                 if(data.code == 250){
                     alert('用户名或密码错误！')
                 }else if(data.code === 1000){
                     // 保存登录信息
-                    localStorage.setItem('username',username);
+                    localStorage.setItem('Authorization',data.data);
 
                     // 获取目标路径
                     let targetPath = this.$route.query.redirectTo;
