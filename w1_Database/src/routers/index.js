@@ -37,15 +37,8 @@ Router.use((req,res,next)=>{
     if(req.method=="OPTIONS") {
         res.sendStatus(200);/*让options请求快速返回*/
     } else{
-        // 校验token
-        // 成功：放行
-        // 失败：
-        let token = req.headers.authorization;console.log('mytoken:',token)
-        if(token && !verify(token)){
-            res.send(formatData({code:401,msg:'unauthorized'}))
-        }else{
-            next();
-        }
+        
+        next();
     }
 
     
@@ -55,6 +48,19 @@ Router.use((req,res,next)=>{
 Router.use('/goods',goodsRouter);
 Router.use('/reg',regRouter);
 Router.use('/login',loginRouter);
+
+// 校验token
+Router.use('/verify',(req,res)=>{
+    // 校验token
+    // 成功：放行
+    // 失败：
+    let token = req.headers.authorization;console.log('mytoken:',token)
+    if(!verify(token)){
+        res.send(formatData({code:401,msg:'unauthorized'}))
+    }else{
+        res.send(formatData())
+    }
+});
 
 
 

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const {pKey} = require('../config.json');
 
 // 生成token（加密）
-exports.create = (data,expiresIn=60)=>{
+exports.create = (data,expiresIn=60*60*2)=>{
     // data:加密的数据
     // expiresIn: token有效期
     // 签名：加密

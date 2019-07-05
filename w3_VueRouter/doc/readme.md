@@ -500,7 +500,7 @@
     * 添加请求头
 * 响应拦截
     > 请求回来后，then之前进行拦截操作
-    
+
 
 * 二进制
 ```js
@@ -511,3 +511,33 @@
     00000000 01100001 01100001
 
 ```
+
+
+### 面试题
+* 在Vue项目中页面返回如何保持滚动条位置
+```js
+    scrollBehavior (to, from, savedPosition) {
+        // return 期望滚动到哪个的位置
+    }
+```
+* 深拷贝对象
+    * 递归遍历
+    * JSON.parse(JSON.stringify(obj))
+* 浅拷贝
+    * Object.assign()
+    * ...
+
+### 知识点
+* Vuex
+    * store
+        * state 状态（数据1->数据2）            data
+        * getters                              computed
+        * mutations                            methods
+            > mutations中的方法是唯一修改state的方式
+        * actions                               
+            > 用于异步操作，在这里一般用于操作mutaions方法
+    * 使用步骤
+        1. 引入
+        2. 创建store
+        3. 把store注入根实例
+        4. 使用this.$store.state.xxx

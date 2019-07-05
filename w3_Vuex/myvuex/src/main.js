@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './routers';
+import store from './vuex';
 
 import axios from 'axios'
 Vue.prototype.$axios = axios;
@@ -26,7 +27,6 @@ axios.interceptors.request.use(config=>{
 axios.interceptors.response.use(res=>{
   // 判断token是否校验成功
   // 校验不成功：过期或被伪造
-  console.log(router.currentRoute.matched.some(item=>item.meta.requiresAuth))
   if(router.currentRoute.matched.some(item=>item.meta.requiresAuth) && res.data.code == 401){
     router.replace({
       path:'/login',
@@ -43,12 +43,15 @@ axios.interceptors.response.use(res=>{
 
 Vue.config.productionTip = false
 
+// Vuex
+
 
 new Vue({
   render: h => h(App),
 
   // 4. 把router实例注入到vue实例中
   router,
+  store,
 }).$mount('#app')
 
 // 5. 使用VueRouter：在任意组件中通过 this.$router

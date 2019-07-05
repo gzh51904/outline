@@ -13,6 +13,7 @@ import Cart from '../pages/Cart.vue';
 import Mine from '../pages/Mine.vue';
 import Login from '../pages/Login.vue';
 import Reg from '../pages/Reg.vue';
+import Goods from '../pages/Goods.vue';
 
 import axios from 'axios';
 
@@ -154,6 +155,11 @@ let router = new VueRouter({
                     className: '1904'
                 }
             }
+        },
+        {
+            name: 'Goods',
+            path: '/goods/:id',
+            component: Goods
         },
 
     ]
