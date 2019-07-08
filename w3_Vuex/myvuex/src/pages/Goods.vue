@@ -7,6 +7,7 @@
     </div>
 </template>
 <script>
+import {mapMutations} from 'vuex';
 export default {
     data(){
         return {
@@ -24,12 +25,18 @@ export default {
 
      data.imgurl = require('../assets/'+data.imgurl);
 
-     this.info = data
+     this.info = data;
+
+        //  隐藏菜单
+        this.displayMenu(false);
+    },
+    destroyed(){
+        this.displayMenu(true);
     },
     methods:{
         add2cart(){
             let {commit,state} = this.$store
-            let {goodslist} = state;
+            let {goodslist} = state.cart;
             let {id} = this.info;
             // 判断当前商品是否已经存在购物车中
             // 存在：数量+1
@@ -40,7 +47,8 @@ export default {
             }else{
                 commit('add',{qty:1,...this.info});
             }
-        }
+        },
+        ...mapMutations(['displayMenu'])
     }
 
 }

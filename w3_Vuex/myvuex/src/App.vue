@@ -16,6 +16,7 @@
           active-text-color="#58bc58"
           @select="handleSelect"
           router
+          v-if="menushow"
         >
           <el-menu-item v-for="item in pages" :key="item.name" :index="item.path">
             <el-badge :value="cartlen" class="item" v-if="item.name=='Cart'">{{item.title}}</el-badge>
@@ -40,6 +41,7 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from 'vuex';
 
 //完整引入：引入ElementUI下所有组件和样式
 // import ElementUI from "element-ui";
@@ -117,7 +119,16 @@ export default {
   },
   computed:{
     cartlen(){
-      return this.$store.state.goodslist.length
+      return this.$store.state.cart.goodslist.length
+    },
+    // ...mapState({
+    //   menushow(state){
+    //     return state.common.menushow
+    //   }
+    // })
+    menushow(){
+      
+      return this.$store.state.common.menushow
     }
   },
   
@@ -146,6 +157,8 @@ export default {
 
     let token = localStorage.getItem("Authorization");
     this.logined = token ? true : false;
+
+    console.log('menushow:',this.$store.state)
   }
 };
 </script>

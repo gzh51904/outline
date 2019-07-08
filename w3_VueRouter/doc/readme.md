@@ -548,3 +548,37 @@
     * mapGetters        映射到computed
     * mapMutations      映射到methods
     * mapActions        映射到methods
+
+### 面试题
+* Vue数据挂载的原理
+```js
+    <div>
+        你好，{{username}}，欢迎来到username
+
+        <p>性别：{{age}}</p>
+    </div>
+
+    let person = {username:'laoxie',age:18,gender:'男'}
+
+    // 利用正则表达式匹配内容
+    let template = div.innerHTML
+    
+    let res = template.match(/\{\{\w+\}\}/g);//['{{username}}','{{age}}']
+    res.forEach(item=>{
+        let key = item.replace(/(\{\{)|(\}\})/g,'');
+        template.replace(item,person[key])
+    })
+
+    // 零宽断言
+    // let res = template.match(/(?<=\{\{)\w+(?=\}\})/g);//['username','age']
+    res.forEach(item=>{
+        template.replace('{{'+item+'}}' ,person[item])
+    })
+```
+
+### 知识点
+* store模块化
+    * modules
+
+    * 对state的获取有变化：this.$store.state.goodslist  -> this.$store.state.cart.goodslist
+    * 对mutations,actions的操作无变化：this.$store.commit('changeQty',10) -> 项目

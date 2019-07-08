@@ -54,13 +54,13 @@ export default {
     // goodslist(){ return this.$store.state.goodslist},
     ...mapState({
       cartlist(state){
-        return state.goodslist;
+        return state.cart.goodslist;
       }
     }),
     //等效于 
     // cartlist(){return this.$store.state.goodslist},
     totalPrice(){
-        return this.$store.state.goodslist.reduce((pre,item)=>{
+        return this.$store.state.cart.goodslist.reduce((pre,item)=>{
             return pre + item.price*item.qty
         },0)
     }
