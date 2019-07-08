@@ -541,3 +541,10 @@
         2. 创建store
         3. 把store注入根实例
         4. 使用this.$store.state.xxx
+* 热更新Hot Update
+
+* Vuex映射
+    * mapState          映射到computed
+    * mapGetters        映射到computed
+    * mapMutations      映射到methods
+    * mapActions        映射到methods

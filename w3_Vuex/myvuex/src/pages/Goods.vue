@@ -19,10 +19,12 @@ export default {
 
     // 发起ajax请求，获取商品信息
      let {data} = await this.$axios.get('/goods/'+id);
-
+     data = data.data[0]
      console.log(data)
 
-     this.info = data.data[0]
+     data.imgurl = require('../assets/'+data.imgurl);
+
+     this.info = data
     },
     methods:{
         add2cart(){
@@ -43,3 +45,6 @@ export default {
 
 }
 </script>
+<style scoped>
+    img{width:400px;}
+</style>

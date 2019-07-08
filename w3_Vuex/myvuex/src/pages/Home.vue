@@ -39,6 +39,7 @@ export default {
 
     this.recommed = data.data.slice(0,20).map(item=>{
       // item.imgurl = '../assets/'+item.imgurl;
+      // img/goods1.jpg
       // let context = require.context('../assets',false,/\.jpg$/);
       // item.imgurl = context('./' + item.imgurl);
       item.imgurl = require('../assets/' + item.imgurl);// ../assets/img/xxx.jpg
@@ -60,7 +61,7 @@ export default {
   del{
     color:#999;
     &::before{
-      content:'￥'
+      content:'$'
     }
   }
   span{
