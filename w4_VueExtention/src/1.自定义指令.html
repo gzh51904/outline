@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1.自定义指令</title>
+</head>
+<body>
+    <h1>1.自定义指令</h1>
+    <div id="app">
+        <h4>{{username}}</h4>
+
+        <input type="text" v-auto-focus:focus.stop.abc="checkuser">
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  指令
+            * 内置指令       
+            * 自定义指令
+                * 全局指令  Vue.directive()
+                * 局部指令
+                * 
+            * 完整的指令
+                * 名称（必须）
+                * 参数
+                * 值
+                * 修饰符
+         */
+
+        //  目的：自定获得焦点指令
+        Vue.directive('autoFocus',{
+            bind(el,binding,vnode){
+                console.log('bind:',binding)
+
+            },
+            inserted(el,binding,vnode){
+                // 插入到页面后执行
+                console.log(666)
+                el.focus();
+                el.addEventListener(binding.arg,binding.value)
+            }
+            // componentUpdated(el,binding,vnode,oldNode){
+
+            // }
+        })
+        
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie'
+            },
+            directives:{
+
+            },
+            methods:{
+                checkuser(){}
+            }
+        });
+    </script>
+</body>
+</html>

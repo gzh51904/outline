@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.过滤器</title>
+</head>
+<body>
+    <h1>2.过滤器</h1>
+    <div id="app">
+        <h4>{{username}}</h4>
+
+        <!-- 等效于 daxie(username) -->
+        <h4>{{username | daxie}}</h4>
+
+        <!-- 等效于 reverse(daxie(username))-->
+        <h4>{{username | daxie('szm') | reverse}}</h4>
+        
+        <p v-for="(item,key) in score">{{key}} : {{item}}</p>
+        
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  2.过滤器
+            * 全局 Vue.filter()
+            * 局部
+            * 使用
+         */
+
+        
+        //  全局过滤器：把用户名变成大写
+        Vue.filter('daxie',(value,arg)=>{
+            if(arg === 'szm'){
+                return value[0].toUpperCase() + value.slice(1)
+            }
+            return value.toUpperCase();
+        })
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                score:{
+                    en:120,
+                    math:140,
+                    cn:90
+                }
+            },
+
+            computed:{
+                userToUpperCase(){
+                    return this.username.toUpperCase();
+                }
+            },
+
+            filters:{
+                gaofen(value){
+                    return value>=100 ? value : ''
+                },
+                reverse(val){
+                    console.log('reverse:',val);
+
+                    return val.split('').reverse().join('')
+                }
+            }
+     
+        });
+    </script>
+</body>
+</html>

@@ -582,3 +582,129 @@
 
     * 对state的获取有变化：this.$store.state.goodslist  -> this.$store.state.cart.goodslist
     * 对mutations,actions的操作无变化：this.$store.commit('changeQty',10) -> 项目
+
+
+## day4-2
+
+### 复习
+* vuex映射
+    * mapState      -> computed
+    * mapGetters    -> computed
+    * mapMutations  -> methods
+    * mapActions    -> methods
+        ```js
+            // 传统
+            this.$store.commit('mutation',prop);
+
+            //映射
+            this.getData(prop)
+        ```
+    * Actions
+        * 什么时候用：有多个组件使用同一个异步求情数据时
+        ```js
+            // 组件A
+            created(){
+                //axios.get('/user').then(res=>{
+                    //操作数据
+                //})
+
+                this.$store.dispath('getUserInfo',{id:123})
+                // this.getUser({id:123})
+            }
+
+            // 组件B
+            created(){
+                //axios.get('/user').then(res=>{
+                    //操作数据
+                //});
+
+                this.$store.dispath('getUserInfo')
+            }
+            //...
+
+            new Vuex.Store({
+                //..
+                state:{
+                    userInfo:{}
+                },
+                mutations:{
+                    // store.commit('changeUser',{username:'jingjing'})
+                    changeUser(state,payload){
+                        state.userInfo = payload;
+                    }
+                },
+
+                // 异步操作（副作用）
+                actions:{
+                    // action -> mutation -> state
+                    // 触发actions: store.dispatch('getUserInfo',{})
+                    getUserInfo(context,params){
+                        // context: 类似store的对象
+                        axios.get('/user',{params}).then({data}=>{
+                            context.commit('changeUser',data.data)
+                        })
+                    }
+                }
+            })
+        ```
+    * 模块化
+        * module
+        ```js
+            new Vuex.Store({
+                modules:{
+                    cart,
+                    common
+                }
+            });
+
+            //调用
+            // this.$store.commit()
+            //this.$store.state.common
+
+            // cart
+            export default {
+                state:{
+                    goodslist:[]
+                },
+                mutations:{
+                    add(){
+
+                    },
+                    remove(){
+
+                    },
+                    changeQty(){
+
+                    }
+                }
+            }
+
+            // common
+            export default {
+                state:{
+                    menushow:true,
+                    userInfo:{}
+                },
+                mutations:{
+                    displayMenu(){
+
+                    },
+                    changeUser(state,user){
+                        state.userInf = user
+                    }
+                },
+                actions:{
+                    login(context){
+                        axios.get().then(res=>{
+                            context.commit('changeUser',res.data)
+                        })
+                    },
+                    logout(){
+
+                    }
+                }
+            }
+
+        ```
+
+### 知识点
