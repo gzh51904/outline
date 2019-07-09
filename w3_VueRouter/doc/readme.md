@@ -708,3 +708,86 @@
         ```
 
 ### 知识点
+* 组件
+    * 全局 Vue.component(name,options)
+    * 局部 components
+* 指令
+    * 全局 Vue.directive(name,options)
+    * 局部 directives
+* 过滤器
+    * 全局 Vue.filter(name,fn)
+    * 局部 fliters
+    * 过滤器使用场景
+        * {{xxx|xxx}}
+        * v-bind:xxx="xxx|xxx"
+* mixin
+    * 全局：Vue.mixin(options) 
+        * options就是组件公共配置文件
+        * 必须定义在实例化前
+    * 局部：mixins
+* 插件
+    * 使用：Vue.use(plugin)
+    * 格式：
+        * 对象
+            * 必须有一个install方法
+        * 函数：就是install方法
+
+    ```js
+        import Vue from 'vue';
+        import VueRouter from 'vue-router';
+
+        Vue.use(vueRouter);//执行插件install方法
+
+        <router-view/>
+        <router-link/>
+
+    ```
+
+* 
+```js
+    new Vue();
+
+    // 自定义构造器
+    let Laoxie = Vue.extend({
+        //..组件配置参数
+    });
+
+    // 通过自定义构造器创建一个组件
+    let myComponent = new Laoxie({
+
+    })
+
+
+    <ul>
+        <li v-for=""></li>
+    </ul>
+
+    Vue.$nextTick(()=>{
+        $('ul').carousel()
+    });//等待节点生成完毕后执行回调
+
+    this.$nextTick(()=>{
+        // ...
+    })
+```
+
+* 团队项目开发注意事项
+    * 术业有专攻
+    * 系统
+        * webApp（移动端）
+        * 后台管理系统（PC端）
+    * 时间规划
+        * 估时间
+    * 任务分配
+        * 了解团队成员的基础上进行
+        * 编写readme.md
+    * git操作
+        * 设置公钥
+        * 添加/提交
+        * 推送/拉取
+        * 分支操作
+    * github操作
+        * 创建团队team
+            * 选择parent Team （VueProject）
+        * 创建仓库
+            * 添加团队并设置write权限

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.其他内置指令</title>
+    <style>
+        [v-cloak]{display:none}
+    </style>
+</head>
+<body>
+    <h1>5.其他内置指令</h1>
+    <div id="app">
+
+        <p v-pre>{{username}}</p>
+        <p v-once v-cloak>{{username}}</p>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  5.其他内置指令
+            * v-pre     不经过编译，原样显示（演示/教程）
+            * v-once    只渲染一次，后续的修改不会触发UI的更新
+            * v-cloak   v-cloak会一直保留在元素上直到数据显示完毕（解决数据闪现的问题 ）
+         */
+
+    
+        
+       
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                
+            },
+        });
+    </script>
+</body>
+</html>

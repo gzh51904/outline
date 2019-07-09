@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.mixin</title>
+</head>
+<body>
+    <h1>4.mixin</h1>
+    <div id="app">
+       <com-a></com-a>
+       <com-b></com-b>
+        
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  4.mixin
+                * 全局：Vue.mixin(options)
+                * 局部: mixins:[mixin,mixin]
+
+                Object.assign(target,obj1,obj2)
+         */
+
+        let myMixin = {
+            methods:{
+                changeNum(){
+                    console.log('mymixin')
+                    this.num = this.num+1;
+                 }
+             }
+         }
+
+         let yourMixin = {
+            methods:{
+                changeNum(){
+                    console.log('yourmixin')
+                    this.num = this.num+1;
+                }
+             },
+             mounted(){
+                 console.log('jubu mixin mounted')
+             }
+         }
+
+         Vue.mixin({
+             mounted(){
+                 console.log('global mixin mounted:',this)
+             }
+         })
+
+         
+
+         Vue.component('comA',{
+             data(){
+                return {
+                    num:10
+                }
+             },
+             template:`<button @click="changeNum">组件A：{{num}}</button>`,
+             mixins:[myMixin,yourMixin],
+
+             methods:{
+                //  changeNum(){
+                //      console.log('comA methods')
+                //      this.num = this.num+1;
+                //  }
+             }
+         })
+
+         
+
+         Vue.component('comB',{
+             data(){
+                return {
+                    num:20
+                }
+             },
+             template:`<button @click="changeNum">组件B：{{num}}</button>`,
+             mixins:[myMixin]
+            //  mounted(){
+            //      console.log('comB:',this)
+            //  }
+            //  methods:{
+            //      changeNum(){
+            //          this.num = this.num+1;
+            //      }
+            //  }
+         })
+        
+
+        
+       
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.Vue插件开发</title>
+</head>
+<body>
+    <h1>3.Vue插件开发</h1>
+    <div id="app">
+       
+        
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        /**
+         *  3.Vue插件开发
+            * 对象
+                * 必须提供一个install方法
+         */
+
+        let myPlugin = {
+            install:function(Vue){
+                // Vue.prototype.$axios =axios;
+
+                Vue.$axios = axios;
+
+                // 为所欲为
+                Vue.component('routerView',{
+
+                })
+
+                Vue.component('routerLink',{
+                    directives:{
+                        //..
+                    }
+                })
+
+                Vue.directive('autoFocus',{})
+            }
+        }
+
+        Vue.use(myPlugin)
+
+        
+       
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                
+            },
+        });
+    </script>
+</body>
+</html>
