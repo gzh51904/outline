@@ -33,6 +33,7 @@ let Acc = {
 
 // 3. 实例化router并配置参数
 let router = new VueRouter({
+    mode:'history',
     // 路由页面信息配置
     routes: [
         {
