@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.JSX语法</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <h1>1.使用React</h1>
+    <div id="app">
+        
+    </div>
+
+    <script type="text/babel">
+        /**
+            JSX语法
+                * js与html混写
+                * 语法限制
+                    * class -> className
+                    * 标签必须闭合
+
+        */
+       let username = 'jingjing';
+       let mystyle = {border:'10px solid #f00'}
+       
+        // let template =  React.createElement('div', {className:'container'},'React渲染');
+        // console.log(template)
+        ReactDOM.render(
+            // 渲染的内容（VirtualDOM）
+            // React.createElement('div', {className:'container'},
+            //     [React.createElement('h4',null,'标题'),
+            //     React.createElement('ul',null,
+            //         React.createElement('li',null,'列表1'),
+            //         React.createElement('li',null,'列表2')
+            //     )]
+            // )
+
+            <div className="container">
+                <h4>用户名：{username}</h4>
+                <ul>
+                    <li>列表1</li>
+                    <li>列表2</li>
+                </ul>
+                <img src="img/mv1.jpg" style={{border:'10px solid #f00'}} />
+                <p>
+                <label htmlFor="username">用户名</label>
+                <input id="username"/>
+                </p>
+            </div>
+            ,
+
+            //挂载点（dom节点）
+            document.getElementById('app')
+        )
+    </script>
+</body>
+</html>
