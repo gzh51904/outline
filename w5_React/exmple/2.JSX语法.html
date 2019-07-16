@@ -21,16 +21,25 @@
                 * js与html混写
                 * 语法限制
                     * class -> className
+                    * for -> htmlFor
+                    * tabindex -> tabIndex
+                    * autofocus -> autoFocus
+                    * ....
                     * 标签必须闭合
+                * JSX是React.createElement()的语法糖
+                * style必须使用对象
 
         */
        let username = 'jingjing';
        let mystyle = {border:'10px solid #f00'}
        
         // let template =  React.createElement('div', {className:'container'},'React渲染');
-        // console.log(template)
+        // console.log(template);//{type,props,key...}
         ReactDOM.render(
             // 渲染的内容（VirtualDOM）
+            // <div>React渲染</div>
+            // React.createElement('div', {className:'container'},'React渲染')
+
             // React.createElement('div', {className:'container'},
             //     [React.createElement('h4',null,'标题'),
             //     React.createElement('ul',null,
@@ -38,7 +47,6 @@
             //         React.createElement('li',null,'列表2')
             //     )]
             // )
-
             <div className="container">
                 <h4>用户名：{username}</h4>
                 <ul>

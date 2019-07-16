@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.节点的频繁操作对性能的影响</title>
+    <!-- <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script> -->
+</head>
+<body>
+    <h1>1.使用React</h1>
+    <button class="btn">1</button>
+    <div id="app">
+        
+    </div>
+
+    <script>
+        /**
+         * 计算一段代码花费的事件
+        */
+        console.time('start')
+        // 节点操作数量：3w;
+        // for(let i=0;i<10000;i++){
+        //     let btn = document.querySelector('.btn');
+        //     let num = btn.innerText;
+        //     btn.innerText = ++num;
+        // }
+
+        // 优化：节点操作数量：3;
+        let btn = document.querySelector('.btn');
+        let num = btn.innerText;
+        for(let i=0;i<10000;i++){
+            ++num
+        }
+        btn.innerText = num;
+        console.timeEnd('start')
+    </script>
+</body>
+</html>

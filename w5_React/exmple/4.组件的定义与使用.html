@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.组件的定义与使用</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <h1>4.组件的定义与使用</h1>
+    <div id="app">
+        
+    </div>
+
+    <script type="text/babel">
+        /**
+            4.组件的定义与使用
+                * 函数组件(无状态组件，受控组件，UI组件)
+                    * 能用函数组件尽量使用函数组件，因为函数组件的性能比较快
+                    * 参数
+                        * props
+                * 类组件(状态组件，非受控组件，容器组件)
+                    * state
+                    * props： this.props
+                
+                * 组件通讯
+                    * props
+                        * children 获取组件内容
+
+                * 列表循环
+        */
+    //    let data = [
+    //        {
+    //            username:'laoxie',
+    //            content:'商品很好，老婆很喜欢。好评'
+    //        },
+    //        {
+    //            username:'jingjing',
+    //            content:'衣服不错，老公穿了很难看，好评'
+    //        },
+    //        {
+    //            username:'dingding',
+    //            content:'第二来了，帽子不错，顶！'
+    //        }
+    //    ]
+
+        // function Comment(){
+        //     return <div>
+        //         <h4>商品评论</h4>
+        //         <CommentList/>
+        //     </div>
+        // }
+
+        class Comment extends React.Component{
+            constructor(){
+                super();// 等效于Parent.call(this)
+
+                // 在super之后才能使用this
+                // 类组件的状态
+                this.state = {
+                    data:[
+                        {
+                            username:'laoxie',
+                            content:'商品很好，老婆很喜欢。好评'
+                        },
+                        {
+                            username:'jingjing',
+                            content:'衣服不错，老公穿了很难看，好评'
+                        },
+                        {
+                            username:'dingding',
+                            content:'第二来了，帽子不错，顶！'
+                        }
+                    ]
+                }
+            }
+            render(){
+                return <div>
+                    <h4>商品评论</h4>
+                    <CommentList data={this.state.data}/>
+                    <CommentForm idx="123">
+                            <button>123</button>
+                            <button>321</button>
+                        </CommentForm>
+                </div>
+            }
+        }
+
+        // 评论表单
+        class CommentForm extends React.Component{
+            render(){
+                // this.props 
+                console.log('CommentForm:',this.props.children)
+                return <div className="form">
+                    <div><textarea></textarea></div>
+                    <CommentButton>发送</CommentButton>
+                </div>
+            }
+        }
+
+        function CommentList(props){
+            return <ul>
+                {
+                    // [<li></li>,<li></li>....]
+                    props.data.map((item,idx)=>{
+                        // return <li key={idx}>
+                        //     <strong>{item.username}：</strong>
+                        //     <div>{item.content}</div>
+                        // </li>
+                        return <CommentItem data={item} key={idx}/>
+                    })
+                }
+            </ul>
+        }
+
+        function CommentItem({data}){
+            return <li>
+                <strong>{data.username}：</strong>
+                <div>{data.content}</div>
+                <CommentButton>回复</CommentButton>
+            </li>
+        }
+
+        function CommentButton(props){
+            return <button>{props.children}</button>
+        }
+
+        ReactDOM.render(
+            <div>
+                <Comment/>
+            </div>,
+            document.querySelector('#app')
+        )
+       
+    </script>
+</body>
+</html>
