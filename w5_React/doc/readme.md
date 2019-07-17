@@ -72,3 +72,122 @@
     ```
 ### 练习
 * 利用React实现todolist
+
+
+## day5-3
+
+### 面试题
+* 响应式属性
+    * getter & setter
+* 属性特性
+    * 值属性
+        * configurable
+        * enumerable
+        * writable
+        * value
+    * 存储器属性
+        * configurable
+        * enumerable
+        * get
+        * set
+    * 设置属性特性
+        * Object.defineProperty(target,key,description
+        * Object.defineProperties(target,descriptions)
+    * 获取属性特性
+        * Object.getOwnPropertyDescriptor()
+        * Object.getOwnPropertyDescriptors()
+
+### 复习
+* React特点
+    * 声明式
+    * 高性能VirtualDOM
+        * 节点操作优化
+        * 事件优化
+        * ...
+    * JSX
+        * html标签、组件、js混用
+        * 限制条件
+            * class -> className
+            * for   -> htmlFor
+            * 驼峰写法
+                * autofocus -> autoFocus
+                * onclick   -> onClick
+                * ....
+            * 闭合标签
+    * 组件化开发
+    * 单向响应数据流
+        * 谁的数据谁修改
+
+* 使用
+    * 浏览器端直接使用
+        * react.js
+        * react-dom.js
+        * babel.js(browser.js)
+            * type="text/babel"
+    * webpack
+* 组件化开发
+    * 限制条件
+        * 必须大写字母开头
+        * 只允许一个根元素
+    * 分类
+        * 函数组件（推荐）
+            * 无状态组件
+            * 受控组件
+            * UI组件
+            ```js
+                function Button(){
+                    return <button></button>
+                }
+            ```
+        * 类组件
+            * 状态组件
+            * 非受控组件
+            * 容器组件
+            ```js
+                class Button extends React.Component{
+                    render(){
+                        return <button></button>
+                    }
+                }
+            ```
+    * 使用
+    ```js
+        <Button/>
+
+    ```
+    * 组件通讯
+        * 父->子：props
+            * children
+
+* 函数式编程 与 面向对象编程
+
+### 知识点
+* gulp
+    * gulp是基于任务的构建工具
+* webpack：基于配置的构建工具（webpack.config.js）
+    * 入口：entry
+    * 加载器：loader
+        * 解析/编译不同的文件
+```js
+    // gulpfile.js
+    let gulp = require('gulp');
+    let sass = require('gulp-sass');
+
+
+    gulp.task('buildSass',()=>{
+        // 匹配文件
+        gulp.src('./src/sass/*.scss')
+
+        // 编译sass
+        .pipe(sass())
+
+        // 输出到硬盘
+        .pipe(gulp.dest('./dist/css'))
+    })
+
+
+
+    // 命令行
+    gulp buildSass
+
+```
