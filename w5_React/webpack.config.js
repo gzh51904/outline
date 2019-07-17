@@ -14,7 +14,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
      entry:'./src/main.js',
      devServer:{
         contentBase:'./src',
-        open:true
+     },
+
+     resolve:{
+        extensions:['.js','.jsx']
      },
 
     //  加载器
@@ -22,7 +25,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
         rules:[
             {
                 //匹配
-                test:/\.js$/,
+                test:/\.jsx?$/,
                 use:{
                     loader:'babel-loader',
                     options:{

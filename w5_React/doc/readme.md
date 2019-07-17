@@ -166,8 +166,17 @@
     * gulp是基于任务的构建工具
 * webpack：基于配置的构建工具（webpack.config.js）
     * 入口：entry
-    * 加载器：loader
+    * 出口：ouput
+    * 测试服务器：devServer
         * 解析/编译不同的文件
+    * 加载器：loader
+        > 用来编译/解析不同的文件类型
+        * module.rules: <Array>
+            * test: <RegExp>
+            * use:<Array>
+                `[{loader:<String>,options:{presets:[]}}]`
+    * 插件：plugins<Array>
+    
 ```js
     // gulpfile.js
     let gulp = require('gulp');
@@ -191,3 +200,24 @@
     gulp buildSass
 
 ```
+
+### 面试题
+* 原型链、this、作用域
+* 函数防抖、节流
+    * 目的：优化性能
+    * 防抖：只执行最后一次
+        * 百度搜索建议
+    * 节流：执行第一次
+        * 滚动加载
+* 重绘与重排
+
+### 知识点
+* 状态
+    * 修改：this.setState()
+* 事件处理
+    * 事件处理函数默认没有this
+    * 事件处理函数最后一个参数为event对象
+* bind方法
+    * 改变this指向，不执行函数，返回一个函数
+    * 只能改变一次this指向
+* ref
