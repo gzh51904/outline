@@ -221,3 +221,93 @@
     * 改变this指向，不执行函数，返回一个函数
     * 只能改变一次this指向
 * ref
+
+## day5-4
+
+### 面试题
+* 如何限定传入组件的数据类型
+    * props数据类型校验
+    ```js
+        //props:['data']
+        props:{
+            // data:[Array,Object],
+            data:{
+                type:[Array,Object],
+                //required:true,
+                default:[],
+
+            }
+        }
+    ```
+* 路由传参
+    * 定义传参：props -> v-bind={username:'xx',age:18} -> v-bind:username="xx" v-bind:age=18
+    * 跳转时传参
+        * query
+        * params
+            * 只支持name方式跳转
+
+### 复习
+* webpack（webpack.config.js）
+    * entry
+    * output
+    * devServer
+    * loader（module.rules）
+        * test
+        * use
+    * plugin
+    * resolve
+        * extensions
+* React
+    * 事件
+        * this
+            * bind
+                * 改变this执行而不执行函数
+                * this指向只能改变一次
+            * 箭头函数
+        * event
+            * 最后一个参数
+        * 传参
+            * bind
+    * ref
+    * 状态组件
+        * state
+            {
+                username:123
+            }
+        * 修改：setState({age:18,username:});//Object.assigin(target,obj1,obj2)
+            * 修改不会立即执行
+                ```js
+                    this.state = {
+                        username:'laoxie'
+                    }
+
+                    this.setState({username:'jingjing'},()=>{
+                        console.log(this.state.username)
+                    });
+
+                    this.state.username;//laoxie
+                ```
+
+## 知识点
+* webpack
+
+* React
+    * context: 组件的共享区域，允许子组件直接访问
+        * 避免逐层传递的麻烦
+        * 使用
+            * 定义：`let MyContext = React.createContext(default)`
+            * 父组件共享数据：`<MyContext.Provider value={data}>`
+            * 子组件获取数据
+                1. contextType
+                    * 子组件设置静态属性：`SubComponent.contextType = myContext`
+                    * 子组件获取共享数据：this.context
+                2. Consumer
+                    ```jsx
+                        <MyContext.Consumer>
+                            {
+                                value=>{
+                                    
+                                }
+                            }
+                        <MyContext.Consumer
+                    ```

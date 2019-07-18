@@ -23,6 +23,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
     //  加载器
     module:{
         rules:[
+            // js&jsx
             {
                 //匹配
                 test:/\.jsx?$/,
@@ -32,6 +33,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
                         presets:['@babel/preset-react']
                     }
                 }
+            },
+
+            // css
+            {
+                test:/\.css$/,
+                // 加载器简写
+                // 加载器的执行顺序：右->左
+                use:['style-loader','css-loader']
+            },
+
+            // sass
+            {
+                test:/\.scss$/,
+                use:['style-loader','css-loader','sass-loader']
             }
         ]
     },

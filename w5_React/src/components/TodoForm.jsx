@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import MyContext from '../context';
 
 // function TodoForm({addItem}){
 //     return <div>
@@ -47,12 +48,17 @@ class TodoForm extends Component{
         }
     }
     render(){
-        return <div>
+        console.log('context:',this.context)
+        return <div className="input-group">
             {/* 给表单绑定value值时必须同时提供onChange修改事件 */}
-            <input type="text" ref="keyword" value={this.state.keyword} onKeyUp={this.handleKeyup} onChange={this.changeKeyword.bind(this)} />
-            <button onClick={this.addParentItem}>添加</button>
+            <input type="text" className="form-control" ref="keyword" value={this.state.keyword} onKeyUp={this.handleKeyup} onChange={this.changeKeyword.bind(this)} />
+            <div className="input-group-append">
+                <button className="btn btn-success" onClick={this.addParentItem}>添加</button>
+            </div>
         </div>
     }
 }
+
+TodoForm.contextType = MyContext
 
 export default TodoForm;

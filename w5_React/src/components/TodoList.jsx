@@ -4,7 +4,10 @@ import React,{Component} from 'react';
 import TodoForm from './TodoForm';
 import TodoContent from './TodoContent';
 
-// import '../css/bootstrap.css';
+import '../css/bootstrap.css';
+
+// 引入context
+import MyContext from '../context';
 
 
 class TodoList extends Component{
@@ -25,7 +28,7 @@ class TodoList extends Component{
                     id:2,
                     content:'面试',
                     date:'2019-8-18',
-                    done:false
+                    done:true
                 }
             ]
         }
@@ -64,6 +67,7 @@ class TodoList extends Component{
         })
     }
 
+
     // 完成
     completeItem(id){
         let data = this.state.data;
@@ -83,9 +87,11 @@ class TodoList extends Component{
     }
 
     render(){
-        return <div>
-            <TodoForm addItem={this.addItem}/>
-            <TodoContent data={this.state.data}/>
+        return <div className="p-3">
+            <MyContext.Provider value={{completeItem:this.completeItem,removeItem:this.removeItem}}>
+                <TodoForm addItem={this.addItem}/>
+                <TodoContent data={this.state.data}/>
+            </MyContext.Provider>
         </div>
     }
 }

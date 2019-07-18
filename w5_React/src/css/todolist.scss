@@ -1,0 +1,19 @@
+$mainColor:#58bc58;
+
+// table{
+//     border:1px solid #ccc;
+
+//     td{
+//         color:$mainColor;
+//     }
+// }
+
+tbody{
+    border-bottom:2px solid #58bc58;
+    &:last-child{
+        border:none;background: #efefef;
+        &::before{
+            content:'未完成';
+        }
+    }
+}
