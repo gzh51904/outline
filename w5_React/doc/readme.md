@@ -290,7 +290,11 @@
 
 ## 知识点
 * webpack
-
+    * loader
+        * css-loader
+        * style-loader
+        * sass-loader
+        * 简写
 * React
     * context: 组件的共享区域，允许子组件直接访问
         * 避免逐层传递的麻烦
@@ -298,16 +302,67 @@
             * 定义：`let MyContext = React.createContext(default)`
             * 父组件共享数据：`<MyContext.Provider value={data}>`
             * 子组件获取数据
-                1. contextType
+                1. contextType（只支持类组件）
                     * 子组件设置静态属性：`SubComponent.contextType = myContext`
                     * 子组件获取共享数据：this.context
-                2. Consumer
+                2. Consumer（推荐）
                     ```jsx
                         <MyContext.Consumer>
                             {
                                 value=>{
-                                    
+
                                 }
                             }
-                        <MyContext.Consumer
+                        <MyContext.Consumer>
                     ```
+
+### 知识点
+* 生命周期函数
+    * Mounting：已插入真实 DOM
+        * componentWillMount
+        * componentDidMount
+    * Updating：正在被重新渲染
+        * componentWillUpdate
+        * componentDidupdate
+    * Unmounting：已移出真实 DOM
+        * componentWillUnmount
+    * 特殊生命周期函数
+        * componentWillReceiveProps
+        * shouldComponentUpdate
+
+    * 目的
+        * 了解每个生命周函数的执行时机
+        * 了解每个生命周函数适合哪些操作
+        * 知道如何通过生命周期函数优化性能
+
+* ReactRouter路由
+    * 一切皆组件
+    * 常用组件
+    * 导航
+        * 声明式导航
+        * 编程式导航
+            * 跳转方式
+                * history.push()
+                * history.replace()
+            * 获取history
+                * 通过Route渲染组件：this.props.history
+                * withRouter高阶组件
+                ```js
+                // 模拟withRouter
+                function withRouter(MyComponent){
+                    return function(){
+                        return <MyComponent history={xxx} location={xxxx} match={xxx}/>
+                    }
+                }
+
+                class App extends Component{
+                    render(){
+                        console.log(this.props.history)
+                        return <div></div>
+                    }
+                }
+
+
+                App = withRouter(App)
+
+                ```

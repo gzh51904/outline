@@ -1,20 +1,23 @@
 /**
     webpack配置文件
-        > 是一个commonjs规范的莫文件
         * 入口: entry
+        * 出口：output
         * 测试服务器：devServer
         * 加载器: loader
         * 插件：plugin
+        * resolve
+            * 扩展名：extensions
  */
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
  module.exports = {
     //  mode:'development'
      entry:'./src/main.js',
      devServer:{
         contentBase:'./src',
+        // port:1904
      },
 
      output:{
@@ -22,7 +25,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
         path:path.join(__dirname,'dist'),
 
         // 输出文件名
-        filename:'js/bundle_[name]_[hash:5].js'
+        filename:'js/bundle-[name]-[hash:5].js'
      },
 
      resolve:{

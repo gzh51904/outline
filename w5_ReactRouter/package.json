@@ -1,5 +1,5 @@
 {
-  "name": "w5_React",
+  "name": "w5-react-router",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,19 +9,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
-    "start": "npm run dev",
-    "build": "webpack"
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.23.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.12.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "sass-loader": "^7.1.0"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
@@ -29,6 +24,10 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "react-router-dom": "^5.0.1",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
