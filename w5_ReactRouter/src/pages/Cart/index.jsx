@@ -1,8 +1,11 @@
 import React,{Component} from 'react';
-import { withStorage } from '../hoc';
 
-@withStorage
-class List extends Component{
+import {withStorage} from '@/hoc'
+
+import './Cart.scss';
+
+@withStorage        // 等效于 Cart = withStorage(Cart) || Cart
+class Cart extends Component{
     // constructor(){
     //     super();
     //     this.state = {
@@ -18,11 +21,11 @@ class List extends Component{
     // }
     render(){
         return <div>
-            List {this.props.token}
+            Cart {this.props.token}
         </div>
     }
 }
 
-// List = withStorage(List);
+// Cart = withStorage(Cart)
 
-export default List;
+export default Cart;

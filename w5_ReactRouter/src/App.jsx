@@ -5,7 +5,7 @@ import {Route,Redirect,Switch,NavLink,withRouter} from 'react-router-dom';
 
 import Home from './pages/Home';
 import List from './pages/List';
-import Cart from './pages/Cart';
+import Cart from './pages/Cart/index';
 import Mine from './pages/Mine';
 
 const page404 = ()=><div>404</div>

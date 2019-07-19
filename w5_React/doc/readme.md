@@ -304,6 +304,43 @@
             * 子组件获取数据
                 1. contextType（只支持类组件）
                     * 子组件设置静态属性：`SubComponent.contextType = myContext`
+                    ```js
+                        class SubComponent extends Component{
+                            // 原型方法：等效于SubComponent.prototype.getData = ()=>{}
+                            getData(){
+
+                            }
+
+                            // ES6静态方法：等效于SubComponent.getData = ()=>{}
+                            static getData(){
+
+                            }
+
+                            // ES6不支持静态属性: 需使用babel插件：@babel/plugin-proposal-class-properties
+                            static contextType = myContext;
+                            //constructor(){
+                                //super()
+                                //this.state = {}
+                            //}
+
+                            // 用了babel插件，可以使用以下写法实现state和事件处理函数
+                            state = {
+
+                            }
+
+                            handleClick = ()=>{
+                                
+                            }
+
+                            render(){
+                                ///this.getData()
+                                return <div></div>
+                            }
+                        }
+
+                        // 静态属性
+                        //SubComponent.contextType = myContext
+                    ```
                     * 子组件获取共享数据：this.context
                 2. Consumer（推荐）
                     ```jsx
@@ -366,3 +403,134 @@
                 App = withRouter(App)
 
                 ```
+
+## day5-5
+
+### 面试题
+* Vue嵌套路由
+    1. 配置
+    ```js
+        routes:[{
+            path:'/list',
+            component:List,
+            children:[{
+                path:'phone', // /list/phone
+                component:Phone
+            },{
+                path:'pad',
+                component:Pad
+            }]
+        },
+
+        //与动态路由的区别
+        {
+            path:'/goods/:id',
+            component:Goods
+        }]
+
+    ```
+    2. 嵌套router-view
+    ```html
+         <!-- App -->
+        <router-view/>
+
+        <!-- List -->
+        <router-view>
+
+    ```
+* Vue插件
+    * Vue扩展，是一个函数或对象（必须包含install方法）
+    ```js
+        let myPlugin = {
+            install(Vue){
+                // 全局方法
+                Vue.directive();
+                Vue.component();
+                Vue.filter()
+                Vue.mixin()
+                //...
+
+                Vue.prototype.$axios = axios
+                Vue.xxx = ()=>{}
+            }
+        }
+
+        let myPlugin = function(Vue){
+            //
+        }
+    ```
+    * 使用：Vue.use(VueRouter);
+
+### 复习
+* ReactRouter(万物皆组件)
+    * 使用ReactRouter就是在调用组件
+    * 常用组件
+        * 路由类型
+            * <HashRouter/>
+            * <BrowserRouter/>
+        * 配置
+            * <Route/>
+                * path
+                * component
+                * render
+                * exact
+            * <Switch/>
+                * 把一些匹配范围较大的<Route/>放到最后
+            * <Redirect>
+                * from
+                * to
+                * exact
+        * 跳转
+            * 声明式导航
+                * <Link/>
+                * <NavLink/>
+                    * activeStyle
+                    * activeClassName
+                    * to : <String><Object>
+                    * replace
+            * 编程式导航
+                * history
+                    * push()
+                    * replace()
+                * 获取history
+                    * 通过<Route/>组件渲染：this.props.history
+                    * 通过withRouter高阶组件：this.props.history
+                        App = withRouter(App)
+                        
+
+### 知识点
+
+* 高阶组件HOC（High Order Component）
+    * 编写高阶组件注意事项：必须转发所有属性
+```js
+    class App extends Component{
+        render(){
+            console.log(this.props.history,this.props.username)
+            return <div>App</div>
+        }
+    }
+    // 最终解析：<div>App</div>
+
+    App = myHoc(App);// 最终解析<MyHoc username="laoxie"><div></div></MyHoc>
+
+    // 模拟withRouter
+    function myHoc(InputComponent){
+        // 官方高阶组件，自己肯定有hitory
+
+        // 函数组件
+        return function(props){//{username:'laoxie,age:18}
+            return <InputComponent history={history} {...props}/> // 等效于username="laoxie" age="18"
+        }
+
+        // 类组件
+        class OuterComponent extends Component{
+            render(){
+                return <InputComponent {...this.props} {...this.state}/>
+            }
+        }
+
+        return OuterComponent
+    }
+```
+* ES7装饰器Decorator：@
+    * 用来简化包装函数的写法

@@ -29,6 +29,9 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
      },
 
      resolve:{
+        alias:{
+            '@' : path.resolve('./src')
+        },
         extensions:['.js','.jsx']
      },
 
@@ -42,7 +45,10 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
                 use:{
                     loader:'babel-loader',
                     options:{
-                        presets:['@babel/preset-react']
+                        presets:['@babel/preset-react'],
+                        plugins:[
+                            ["@babel/plugin-proposal-decorators",{legacy: true}]
+                        ]
                     }
                 }
             },
