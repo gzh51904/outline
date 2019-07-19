@@ -534,3 +534,24 @@
 ```
 * ES7装饰器Decorator：@
     * 用来简化包装函数的写法
+
+
+### 面试题
+* 获取数组中最大值
+    Math.max(...arr)
+    Math.max.apply(null,arr)
+* HTML5新特性
+    * 新标签
+    * 新类型
+    * audio,video,canvas
+    * svg
+    * webStorage
+    * webSocket
+    * formData
+    * worker
+    * draggable
+    * ......
+* eval() js中最强大的方法
+
+### 知识点
+* 

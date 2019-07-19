@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import List from './pages/List';
 import Cart from './pages/Cart/index';
 import Mine from './pages/Mine';
+import Goods from './pages/Goods/index';
 
 const page404 = ()=><div>404</div>
 
@@ -63,6 +64,9 @@ class App extends Component{
                     <Route path="/list" component={List}/>
                     <Route path="/cart" component={Cart}/>
                     <Route path="/mine" component={Mine}/>
+                    
+                    {/* 动态路由 */}
+                    <Route path="/goods/:id" component={Goods}/>
                     <Route path="/404" render={()=><div>oh no 404</div>}/>
                     <Redirect from="/" to="/home" exact/>
                     <Redirect from="/*" to="/404"/>
