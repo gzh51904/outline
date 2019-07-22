@@ -579,3 +579,20 @@
         * ....
     
 ### 知识点
+* antd+ReactRouter+create-react-app搭建项目基本框架
+
+### 面试题
+* React如何实现v-if的效果
+    * 三元运算
+
+* React与其他框架的配合使用
+    * jQuery
+
+### 知识点
+* 格式化数据
+    [{goods:{title,item}}] -> [{title,item}]
+* React.Fragment 
+```jsx
+    // document.createDocumentFragment
+    <React.Fragment></React.Fragment> -> <></>
+```

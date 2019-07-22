@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import List from './pages/List';
 import Cart from './pages/Cart';
 import Mine from './pages/Mine';
+import Goods from './pages/Goods';
 
 let AllRouter = {
   Home,
@@ -89,6 +90,7 @@ class App extends Component {
           <Route path="/cart" component={Cart}/>
           <Route path="/list" component={List}/>
           <Route path="/mine" component={Mine}/> */}
+          <Route path="/goods/:id" component={Goods}/>
           <Redirect from="/" to="/home" exact/>
           </Switch>
       </div>
