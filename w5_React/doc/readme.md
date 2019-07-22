@@ -555,3 +555,27 @@
 
 ### 知识点
 * 
+
+
+
+## day6-1
+
+### 复习
+* 路由ReactRouter
+    * 万物皆组件
+    * 动态路由
+    * 嵌套路由
+* 全家桶
+    * Vue全家桶
+        * Vue
+        * VueRouter
+        * Vuex
+        * VueCLI
+        * axios
+    * React全家桶
+        * React
+        * ReactRouter
+        * Redux
+        * ....
+    
+### 知识点
