@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 
 import { api } from '../../utils';
 
+// import store from '../../store';
+
 import { List, Card, Button, Icon} from 'antd';
+import {connect} from 'react-redux';
+import {addAction} from '../../store/cartActions';
 
 class Goods extends Component {
     constructor() {
@@ -32,15 +36,30 @@ class Goods extends Component {
             },
             recommed: datas.goods_commend_list
         })
+
+
+        // store.subscribe(()=>{
+        //     console.log('subscribe:',store.getState())
+        // })
     }
     render() {
         let { info,recommed } = this.state;
+        let {add2cart} = this.props;
+
+        console.log('Goods.props',this.props)
+        
+
         return (
             <div style={{ padding: '15px' }}>
                 <div style={{textAlign:'center'}}><img src={info.imgurl} alt={info.goods_name} /></div>
                 <h1>{info.goods_name}</h1>
+                <p>{info.goods_promotion_price}</p>
 
-                <Button type="danger" size="large"><Icon type="shopping-cart" />加入购物车</Button>
+                <Button type="danger" size="large" onClick={()=>{
+                    // store.dispatch({type:'add_to_cart',payload:{id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price}})
+                    // dispatch({type:'add_to_cart',payload:{id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price}})
+                    add2cart({id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price})
+                }}><Icon type="shopping-cart" />加入购物车</Button>
 
                 {/* 推荐列表 */}
                 <h4>推荐商品</h4>
@@ -68,5 +87,21 @@ class Goods extends Component {
         )
     }
 }
+
+let mapStateToProps = (state,ownprops)=>{
+    return {
+
+    }
+}
+
+let mapDispatchToProps = (dispatch,ownprops)=>{
+    return {
+        add2cart(goods){
+            dispatch(addAction(goods))
+        }
+    }
+}
+
+Goods = connect(mapStateToProps,mapDispatchToProps)(Goods);
 
 export default Goods;

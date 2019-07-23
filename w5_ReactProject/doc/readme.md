@@ -99,3 +99,26 @@
                     return {}
                 }
             ```
+* redux的使用
+    1. 创建store: redux.createStore(reducer)
+    2. 引入store: 
+        * import store from './store';
+            * 缺点：
+                * 每个组件都要引入
+                * 不能自动更新(手动监听+强制刷新)
+        * 利用props传递store
+            * context： react-redux（一个连接react组件与redux的工具）
+            * 优点：只要props有修改，则自动刷新组件
+    3. 操作
+        * 获取state：store.getState()
+        * 修改state：store.dispatch(action)
+        * 监听state：store.subscribe(fn)
+
+* react-redux
+    > 是一个连接react组件与redux的工具，利用context传输store
+
+* v-html
+    `<div dangerouslySetInnerHTML={{__html:this.state.test}}></div>`
+* Action Creator
+    * 一个用于生成action的函数
+    * bindActionCreators
