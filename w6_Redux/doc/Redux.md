@@ -30,15 +30,15 @@ Redux ，也可以使用 Redux 而不使用 React
 
 >store是Redux存储区（一个保存数据的地方），你可以把它看成一个仓库，规定一个应用只能有一个Store，store中的数据可以被直接访问，但只能通过提供的reducer进行更新。
 
-* 生成数据仓库方法：createStore() 
+* 生成数据仓库方法：`createStore(reducer[,initState][,middleware])` 
 ```javascript
     import { createStore } from 'redux';
     const store = createStore(reducer);//reducer为一个纯函数，用于设定state修改逻辑（如何修改state中的数据）
 ```
 * 常用方法
-    * getState() 获取仓库最新状态（数据）
-    * dispatch(action) 操作数据
-    * subscribe(fn) 监听数据修改
+    * store.getState() 获取仓库最新状态（数据）
+    * store.dispatch(action) 操作数据
+    * store.subscribe(fn) 监听数据修改
 
 #### 数据存储：State
 
@@ -65,7 +65,7 @@ Redux ，也可以使用 Redux 而不使用 React
     * payload: 用于更新状态的数据。
 * 使用方式：
 ```js
-    store.dispatch({type:'UPDATE_CART',{num:100});
+    store.dispatch({type:'UPDATE_CART',num:100});
 ```
 
 #### Action Creator
@@ -117,9 +117,10 @@ Reducer 必须是一个**纯函数**，用于指定state修改逻辑，它接受
 * 处理多个Reducer：combineReducers
 ```js
     import { createStore,combineReducers } from "redux";
-    const productsReducer = function(state=[], action) {
-      return state;
-    }
+
+    import productsReducer from './productsReducer';
+    import cartReducer from './cartReducer';
+
     //合并Reducer
     const allReducers = {
       products: productsReducer,
@@ -219,23 +220,46 @@ Reducer 必须是一个**纯函数**，用于指定state修改逻辑，它接受
 
 redux中的action仅支持原始对象（plain object），处理有副作用的action，需要使用中间件。中间件可以在发出action，到reducer函数接受action之间，执行具有副作用的操作
 
+### 常用中间件
 * redux-chunk
 * redux-promise
 * redux-saga
+    * Generator生成器函数
+        * yield
+        * Iterator
+    * Effect
+        * call
+        * put
+        * takeEvery
+        * takeLatest
+
+### 使用中间件
+1. 利用applyMiddleware接受中间件（可同时接受多个中间件）
+2. 通过createStore的第3个参数连接中间件与store
 
 ```js
     import {createStore,applyMiddleware} from 'redux';
     import createSagaMiddleware from 'redux-saga';
+    
+    // 1.引入自定义saga配置文件
+    import rootSaga from './rootSaga.js';
 
-    // 1.创建saga中间件
+    // 2.创建saga中间件
     const sagaMiddleware = createSagaMiddleware();
 
-    // 2.将 sagaMiddleware 连接至 Store
-    const store  = createStore(reducer,applyMiddleware(sagaMiddleware));
+    // 3.将 sagaMiddleware 连接至 Store
+    let enhancer = applyMiddleware(sagaMiddleware)
+    const store  = createStore(reducer,enhancer);
 
-    // 3.运行 Saga配置
+    // 4.运行 Saga配置
     sagaMiddleware.run(rootSaga);
+```
 
+> 多个enhancer使用redux.compose组合成单个enhancer
+```js
+    import {createStore,applyMiddleware,compose} from 'redux'
+    let enhancer = compose(...enhancer);
+    const store  = createStore(reducer,enhancer);
 ```
 
 ## 调式Redux程序
@@ -248,9 +272,21 @@ redux中的action仅支持原始对象（plain object），处理有副作用的
 
 3. 引入并使用
 ```js
-    //store/index.js
+    // 单独使用
     import {composeWithDevTools } from 'redux-devtools-extension';
     const store = createStore(rootReducer,composeWithDevTools());
+    export default store;
+
+    // 与saga一起使用
+    import {createStore,applyMiddleware,compose} from 'redux'
+    import rootSaga from './rootSaga.js';
+    const sagaMiddleware = createSagaMiddleware();
+
+    let enhancer = composeWithDevTools(applyMiddleware(sagaMiddleware))
+    // 或使用compose
+    // let enhancer = compose(applyMiddleware(sagaMiddleware),composeWithDevTools())
+
+    const store = createStore(rootReducer,enhancer)
     export default store;
 ```
 4. 在Chrome浏览器中调试redux程序

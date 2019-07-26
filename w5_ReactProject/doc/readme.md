@@ -139,14 +139,15 @@
     * redux-saga
         * Generator 生成器
             * yield
-            * 
+            * generator执行后不会执行函数内的代码，但返回一个迭代器Iterator
         * Iterator  迭代器
             * next()
         ```js
-        // Genderator生成器函数
-        function* show(){
-            yield   axios.get()     暂停
-            yield   200
-            return  300
-        }
+            // Genderator生成器函数
+            function* show(){
+                yield   axios.get()     暂停
+                yield   200
+                return  300
+            }
         ```
+* 单元测试
