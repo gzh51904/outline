@@ -122,3 +122,31 @@
 * Action Creator
     * 一个用于生成action的函数
     * bindActionCreators
+
+## day6-3
+* 项目
+## day6-4
+* 项目
+
+## day6-5
+* React & Redux & React-Redux 三者的关系
+    * react-redux的原理：context
+        * Provider
+        * connect
+* redux中间件
+    * redux-chunk
+    * redux-promise
+    * redux-saga
+        * Generator 生成器
+            * yield
+            * 
+        * Iterator  迭代器
+            * next()
+        ```js
+        // Genderator生成器函数
+        function* show(){
+            yield   axios.get()     暂停
+            yield   200
+            return  300
+        }
+        ```

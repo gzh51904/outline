@@ -1,4 +1,7 @@
-import {ADD_TO_CART,REMOVE_FROM_CART,CHANGE_GOODS_QTY} from './cartActions';
+/**
+ * 购物车Reducer
+ */
+import {ADD_TO_CART,REMOVE_FROM_CART,CHANGE_GOODS_QTY} from '../store/cartActions';
 
 // 初始化state
 let initState = {

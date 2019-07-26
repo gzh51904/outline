@@ -136,7 +136,7 @@ App = withRouter(App);
 // 把store中的数据通过props传入当前组件
 let mapStateToProps = (state)=>{
   return {
-    goodslen:state.goodslist.length
+    goodslen:state.cart.goodslist.length
   }
 }
 App = connect(mapStateToProps)(App)

@@ -6,7 +6,7 @@ import { api } from '../../utils';
 
 import { List, Card, Button, Icon} from 'antd';
 import {connect} from 'react-redux';
-import {addAction} from '../../store/cartActions';
+import {addAction,changeQtyAction} from '../../store/cartActions';
 
 class Goods extends Component {
     constructor() {
@@ -44,7 +44,7 @@ class Goods extends Component {
     }
     render() {
         let { info,recommed } = this.state;
-        let {add2cart} = this.props;
+        let {add2cart,changeQty,goodslist} = this.props;
 
         console.log('Goods.props',this.props)
         
@@ -58,7 +58,21 @@ class Goods extends Component {
                 <Button type="danger" size="large" onClick={()=>{
                     // store.dispatch({type:'add_to_cart',payload:{id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price}})
                     // dispatch({type:'add_to_cart',payload:{id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price}})
-                    add2cart({id:info.goods_id,name:info.goods_name,price:info.goods_promotion_price})
+                    // 判断购物车中是否已经存在当前商品
+                    let current = goodslist.filter(item=>item.id===info.goods_id)[0];
+                    if(!current){
+                        add2cart({
+                            id:info.goods_id,
+                            name:info.goods_name,
+                            price:info.goods_promotion_price,
+                            imgurl:info.imgurl,
+                            qty:1
+                        })
+                    }else{
+
+                        changeQty({id:info.goods_id,qty:current.qty+1})
+                    }
+                    
                 }}><Icon type="shopping-cart" />加入购物车</Button>
 
                 {/* 推荐列表 */}
@@ -90,7 +104,7 @@ class Goods extends Component {
 
 let mapStateToProps = (state,ownprops)=>{
     return {
-
+        goodslist:state.cart.goodslist
     }
 }
 
@@ -98,6 +112,9 @@ let mapDispatchToProps = (dispatch,ownprops)=>{
     return {
         add2cart(goods){
             dispatch(addAction(goods))
+        },
+        changeQty({id,qty}){
+            dispatch(changeQtyAction({id,qty}))
         }
     }
 }
