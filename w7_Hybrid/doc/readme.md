@@ -38,9 +38,31 @@
         * 跨平台
     * 缺点
         * 不能调用硬件设备
+    * 使用技术：html+css+javascript
 * NativeApp     原生应用
     * 缺点：
         * 成本高
     * 优点
         * 性能好，流畅
-* Hybrid
+    * 使用技术
+        * android: xml+java
+        * iOS: xml + （Objective-C/swift）
+* HybridApp
+    * 综合WebApp与NativeApp的优点， 在native中利用webview中嵌入H5页面形成半Native半web开发模式
+    * 开发模式
+        * Native主导
+        * H5主导
+* h5主导的开发模式
+    * 利用第三方平台
+        * 云平台
+            * DCloud
+            * APICloud
+                * 5+runtimer:通过window.plus提供接口
+        * 本地打包
+            * android
+                * java环境
+                * android环境
+                * cordova
+            * iOS
+                * 买一台macBook
+                * Xcode

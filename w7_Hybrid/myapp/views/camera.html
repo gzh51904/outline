@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<h1>摄像头相关操作</h1>
+		<button type="button" class="mui-btn" id="btnPaizhao">拍照</button>
+		<button type="button" class="mui-btn mui-btn-primary">录像</button>
+		<button type="button" class="mui-btn mui-btn-success">扫码</button>
+		<div class="show"></div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true
+			})
+			mui.plusReady(function () {
+			    let show = document.querySelector('.show');
+				
+				// 摄像头相关
+				// 1.通过plus.camera获取摄像头对象
+				let camera = plus.camera.getCamera(); //返回:摄像头对象
+				
+				let btnPaizhao = document.querySelector('#btnPaizhao');
+				btnPaizhao.onclick = ()=>{
+					
+					camera.captureImage(path=>{
+						// path: 拍照后的图片路径
+						
+						
+						// 将本地地址转成平台地址
+						let realPath = plus.io.convertLocalFileSystemURL( path );
+						
+						console.log('path:',path,realPath);
+						
+						// 把图片显示到页面
+						let img = new Image();
+						img.src = realPath;
+						show.appendChild(img);
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>

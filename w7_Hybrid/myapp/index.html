@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+	<style>
+		.show img{width:100%;}
+	</style>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+		
+		mui.plusReady(function () {
+		    // 等效于:document.addEventListener( "plusready", onPlusReady, false );
+			
+			
+			
+			// 2. 拍照
+			let btnCamera = document.querySelector('#btnCamera');
+			
+			btnCamera.onclick = ()=>{
+				// 点击摄像头,跳转到views/camera.html
+				plus.webview.open('views/camera.html','pageCamera')
+				
+			}
+		})
+		
+		
+		// let onPlusReady = ()=>{
+		// 	// 待window.plus可用时执行
+		// 	
+		// 	
+		// }
+		// document.addEventListener( "plusready", onPlusReady, false );
+    </script>
+</head>
+<body>
+	<h1>H5+接口调用演示</h1>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-camera"></i>
+				<div class="mui-media-body" id="btnCamera">
+					摄像头
+					<p class='mui-ellipsis'>拍照、录像、二维码...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body">
+					语音
+					<p class='mui-ellipsis'>语音识别，聊天</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+	<div class="show">
+		
+	</div>
+</body>
+</html>
