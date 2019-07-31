@@ -6,13 +6,18 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			.show img{width:100%;}
+			.show video{width:100%}
+		</style>
 	</head>
-
+	
 	<body>
 		<h1>摄像头相关操作</h1>
 		<button type="button" class="mui-btn" id="btnPaizhao">拍照</button>
-		<button type="button" class="mui-btn mui-btn-primary">录像</button>
+		<button type="button" class="mui-btn mui-btn-primary" id="btnVideo">录像2</button>
 		<button type="button" class="mui-btn mui-btn-success">扫码</button>
+		
 		<div class="show"></div>
 		<script src="../js/mui.js"></script>
 		<script type="text/javascript">
@@ -21,20 +26,29 @@
 			})
 			mui.plusReady(function () {
 			    let show = document.querySelector('.show');
+				let btnPaizhao = document.querySelector('#btnPaizhao');
+			    let btnVideo = document.querySelector('#btnVideo');
 				
 				// 摄像头相关
-				// 1.通过plus.camera获取摄像头对象
+				// 通过plus.camera获取摄像头对象
 				let camera = plus.camera.getCamera(); //返回:摄像头对象
 				
-				let btnPaizhao = document.querySelector('#btnPaizhao');
+				// 1.拍照
 				btnPaizhao.onclick = ()=>{
 					
 					camera.captureImage(path=>{
-						// path: 拍照后的图片路径
+						// path: 拍照后的图片路径  _doc/xxxx.jpg
 						
 						
 						// 将本地地址转成平台地址
 						let realPath = plus.io.convertLocalFileSystemURL( path );
+						
+						// 保存到相册
+						plus.gallery.save( path,()=>{
+							console.log('保存成功')
+						},(err)=>{
+							console.log('保存失败',err)
+						});
 						
 						console.log('path:',path,realPath);
 						
@@ -43,6 +57,33 @@
 						img.src = realPath;
 						show.appendChild(img);
 					})
+				}
+				
+				
+				// 2. 录像
+				btnVideo.onclick = ()=>{
+					camera.startVideoCapture(path=>{
+						
+						plus.gallery.save( path,()=>{
+							console.log('保存视频成功')
+						});
+						
+						
+						// HTML Video的使用
+						let video = document.createElement('video');
+						// 将本地地址转成平台地址
+						let realPath = plus.io.convertLocalFileSystemURL( path );
+						video.src = realPath;
+						video.controls = true;
+						
+						
+						video.poster = './img/jingjing.png'
+						
+						// 自动播放
+						// video.play()
+						
+						show.appendChild(video);
+					});
 				}
 			})
 		</script>

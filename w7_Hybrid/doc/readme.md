@@ -56,8 +56,8 @@
     * 利用第三方平台
         * 云平台
             * DCloud
-            * APICloud
                 * 5+runtimer:通过window.plus提供接口
+            * APICloud
         * 本地打包
             * android
                 * java环境
@@ -66,3 +66,31 @@
             * iOS
                 * 买一台macBook
                 * Xcode
+
+## day7-3
+
+### 复习
+* DCloud
+    * h5+runtime接口：window.plus
+        * 摄像头:plus.camera
+        * IO：plus.io
+        * webview：plus.webview
+        * 事件
+            ```js
+                document.addEventListener('plusready',()=>{
+                    //plus准备就绪
+                })
+
+                // mui
+                mui.plusReady(()=>{
+
+                });
+            ```
+    * mui
+        ```js
+            mui.plusReady()
+            mui.init()
+
+        ```
+### 知识点
+* 
