@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=x4RLsqK9mFnB0Vf3QiNLvSMAVmuhWqPe"></script>
+		<style>
+			#bdmap{height:100vh}
+		</style>
+	</head>
+
+	<body>
+		<div id="bdmap"></div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function () {
+			       // 创建Map实例
+					var map = new BMap.Map("bdmap"); 
+					// map.centerAndZoom("广州",19);
+					map.enableScrollWheelZoom(true);
+					map.enableDragging();
+					
+					//全景效果
+					// 覆盖区域图层测试
+					// map.addTileLayer(new BMap.PanoramaCoverageLayer());
+
+					var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+					stCtrl.setOffset(new BMap.Size(20, 20));
+					map.addControl(stCtrl);//添加全景控件
+					
+					// HTML5 geolocation
+					// navigator.geolocation.getCurrentPosition(position=>{
+					// 	console.log('当前位置：',position);
+					// 	let {longitude,latitude} = position.coords;
+					// 	map.centerAndZoom(new BMap.Point(longitude,latitude), 19);
+					// });
+					
+					// h5+API
+					plus.geolocation.getCurrentPosition((position)=>{
+						console.log('h5+',position);
+						
+						let {longitude,latitude} = position.coords;
+						map.centerAndZoom(new BMap.Point(longitude,latitude), 19);
+					});
+					
+					plus.geolocation.watchPosition((position)=>{
+						let {longitude,latitude} = position.coords;
+						map.centerAndZoom(new BMap.Point(longitude,latitude), 19);
+					});
+					
+					
+				
+			})
+
+			
+			
+			function getCurrentPosition(){
+				var options={
+					enableHighAccuracy:true,
+					timeout:60000,
+					maximumAge:60000
+				}
+				navigator.geolocation.getCurrentPosition(success,error,options)
+			}
+			function success(position)
+			{
+				var x=position.coords.longitude;
+				var y=position.coords.latitude;
+				alert("经度为:"+x+"纬度为:"+y);
+			}
+			function error(err)
+			{
+				var errorTypes={
+					1:"用户拒绝定位服务",
+					2:"获取不到定位信息",
+					3:"获取定位信息超时"
+				}
+				alert(errorTypes[err.code]);
+			}
+			
+		// getCurrentPosition();
+	
+			
+			
+			
+		</script>
+	</body>
+
+</html>
