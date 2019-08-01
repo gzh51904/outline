@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			.container{padding:15px;}
+			button.mui-btn{display:block;margin:10px 0;width:100%;}
+			.container img{width:100%}
+			.price span::before,.price del::before{content:'￥'}
+			.price span{color:#f00;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img src="img/jingjing.png"/>
+			<h1>静静健身房三日游</h1>
+			<p class="price"><del>998</del> <span>0.01</span></p>
+			<button type="button" class="mui-btn mui-btn-danger btnBuy">立即购买</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function () {
+				let btnBuy = document.querySelector('.btnBuy');
+				let price = document.querySelector('.price span');
+				let title = document.querySelector('h1');
+				
+				
+				// 后端接口（DCloud）:
+				// 所需参数:payid(支付方式id)
+				var paymentApi = 'http://demo.dcloud.net.cn/payment/?payid=';
+				
+				btnBuy.onclick = ()=>{
+					
+					plus.payment.getChannels(channels=>{
+						console.log('channels:',channels)
+						let buttons = channels.map(item=>{
+							return {
+								title:item.description
+							}
+						})
+						let actionstyle = {
+							title:"选择支付方式",
+							cancel:"取消",
+							buttons
+						}
+						
+						plus.nativeUI.actionSheet(actionstyle, (e)=>{
+							let idx = e.index;
+							if(idx>0){
+								let currentPay = channels[idx-1];
+								// ?payid=alipay'
+								let id = currentPay.id;
+								if (id == 'alipay' || id == 'wxpay') {
+									paymentApi += currentPay.id;
+								}else{
+									plus.nativeUI.alert('当前不支持'+currentPay.description + '通道')
+								}
+								
+								// 判断当前支付是否可用
+								if (currentPay.serviceReady) {
+									// 商品价格
+									paymentApi +='&total='+price.innerText;
+									
+									// appid
+									var appid = plus.runtime.appid;
+									paymentApi += '&appid='+appid
+									
+									// 完成api地址
+									// 'http://demo.dcloud.net.cn/payment/?payid=alipy&total=9.8&appid=xxxx'
+									
+									// 发起请求
+									var xhr = new XMLHttpRequest();
+									xhr.onload=()=> {
+									        var order = xhr.responseText;console.log('后端返回信息:',order)
+											
+											// 后端返回订单信息后调用支付接口
+									        plus.payment.request(currentPay, order, function (result) {
+									            console.log('----- 支付成功 -----');
+									            console.log(result);
+									            plus.nativeUI.alert('支付成功：感谢你的支持，我们会继续努力完善产品。', function () {
+									                back();
+									            }, '捐赠');
+									        }, function (e) {
+									            console.log('----- 支付失败 -----');
+									            console.log('[' + e.code + ']：' + e.message);
+									            plus.nativeUI.alert(
+									                '更多错误信息请参考支付(Payment)规范文档：http://www.html5plus.org/#specification#/specification/Payment.html',
+									                null, '支付失败：' + e.code);
+									        });
+									}
+									xhr.open('GET', paymentApi,true);
+									xhr.send();
+								}
+							}
+						});
+					})
+				}
+			});
+		
+		</script>
+	</body>
+	
