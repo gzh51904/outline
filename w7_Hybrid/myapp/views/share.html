@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			.container{padding:15px;}
+			button.mui-btn{display:block;margin:10px 0;width:100%;}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>分享</h1>
+			<button type="button" class="mui-btn mui-btn-primary btnsimple">简单分享</button>
+			<button type="button" class="mui-btn mui-btn-success btnSystem">系统分享</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function () {
+			    let btnsimple = document.querySelector('.btnsimple')
+			    let btnSystem = document.querySelector('.btnSystem')
+				
+				btnsimple.onclick = ()=>{
+					plus.share.getServices((services)=>{
+						console.log('service:',services)
+						
+						let buttons = services.map(item=>{
+							return {
+								title:item.description
+							}
+						})
+						
+						// 调用系统UI菜单
+						var actionstyle={
+							title:"分享到",
+							cancel:"取消分享",
+							buttons
+						};
+						plus.nativeUI.actionSheet(actionstyle, (e)=>{
+							var index=e.index; // 用户关闭时点击按钮的索引值
+							console.log(index);
+							if(index === 0) return;
+							
+							var current = services[index-1];
+							if(!current.authenticated){
+								current.authorize(function(){
+									console.log("认证完成！");
+									
+									current.send({
+										type:"image",
+										pictures:['img/jingjing.png']
+									}, ()=>{
+										console.log('分享成功')
+									});
+								}, function(e){
+									console.log("未进行认证")
+								}, {
+									//注册微信/QQ/微博有一个appid
+									"appid": "XXXXXX"
+								});
+							}
+						});
+					});
+				}
+				
+				btnSystem.onclick = ()=>{
+					plus.share.sendWithSystem({
+						type:"image",
+						pictures:['img/jingjing.png']
+					}, ()=>{
+						console.log('系统分享成功')
+					});
+				}
+			})
+		</script>
+	</body>
+
+</html>

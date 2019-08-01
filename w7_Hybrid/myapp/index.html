@@ -15,6 +15,8 @@
 			
 			let btnCamera = document.querySelector('#btnCamera');
 			let btnMap = document.querySelector('#btnMap');
+			let btnSpeech = document.querySelector('#btnSpeech');
+			let btnShare = document.querySelector('#btnShare');
 			
 			
 			
@@ -29,6 +31,21 @@
 			btnMap.onclick = ()=>{
 				// 点击摄像头,跳转到views/camera.html
 				plus.webview.open('views/map.html','pageMap')
+				
+			}
+			
+			
+			//语音
+			btnSpeech.onclick = ()=>{
+				// 点击摄像头,跳转到views/camera.html
+				plus.webview.open('views/speech.html','pageSpeech')
+				
+			}
+			
+			//分享
+			btnShare.onclick = ()=>{
+				// 点击摄像头,跳转到views/camera.html
+				plus.webview.open('views/share.html','pageShare',null,'fade-in')
 				
 			}
 		})
@@ -66,9 +83,18 @@
 		<li class="mui-table-view-cell mui-media">
 			<a href="javascript:;">
 				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
-				<div class="mui-media-body">
+				<div class="mui-media-body" id="btnSpeech">
 					语音
 					<p class='mui-ellipsis'>语音识别，聊天</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-pengyouquan"></i>
+				<div class="mui-media-body" id="btnShare">
+					分享
+					<p class='mui-ellipsis'>朋友圈、QQ、微博、微信...</p>
 				</div>
 			</a>
 		</li>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+	<input type="search" id="keyword">
+	<button type="button" class="mui-btn mui-btn-primary btnBaidu">百度1s</button>
+	<button type="button" class="mui-btn mui-btn-success btnIfly">讯飞</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			mui.plusReady(function () {
+			    let btnBaidu = document.querySelector('.btnBaidu')
+			    let btnIfly = document.querySelector('.btnIfly')
+			    let keyword = document.querySelector('#keyword')
+				
+				btnBaidu.onclick = ()=>{
+					plus.speech.startRecognize({
+						engine:'baidu',
+						lang:'zh-cantonese'
+					},(res)=>{
+						keyword.value = res;
+					})
+				}
+				
+				btnIfly.onclick = ()=>{
+					plus.speech.startRecognize({
+						engine:'iFly',
+						lang:'zh-cantonese'
+					},(res)=>{
+						keyword.value = res;
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>
