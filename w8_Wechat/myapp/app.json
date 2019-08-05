@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/goods/goods",
+    "pages/list/list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#58bc58",
+    "navigationBarTitleText": "H5-1904",
+    "navigationBarTextStyle": "white",
+    "backgroundColor":"#f60",
+    "enablePullDownRefresh":true
+  },
+  "tabBar":{
+    "color":"#fff",
+    "selectedColor":"#ffff00",
+    "backgroundColor":"#58bc58",
+    "position":"top",
+    "list":[
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath":"/img/home.png",
+        "selectedIconPath": "/img/homes.png"
+      },
+      {
+        "pagePath":"pages/list/list",
+        "text":"商品列表",
+        "iconPath": "/img/list.png",
+        "selectedIconPath": "/img/lists.png"
+      },
+      {
+        "pagePath": "pages/goods/goods",
+        "text": "商品详情"
+      }
+    ]
+  }
+}
