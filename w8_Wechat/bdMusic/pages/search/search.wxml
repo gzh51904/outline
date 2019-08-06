@@ -1,0 +1,35 @@
+
+<wxs module="tools" src="../../utils/tools.wxs">
+</wxs>
+
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+      <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">搜索</view>
+    </label>
+  </view>
+  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+<view class="weui-cells searchbar-result" wx:if="{{result.length > 0}}">
+  <navigator url="" class="weui-cell" hover-class="weui-cell_active" wx:for="{{result}}" wx:key="songid">
+    <view class="weui-cell__bd">
+      <navigator url="/pages/player/player?songid={{item.songid}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="{{item.artistpic}}" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">{{item.songname}}</view>
+          <view class="weui-media-box__desc">歌手：{{item.artistname}}</view>
+        </view>
+      </navigator>
+    </view>
+  </navigator>
+</view>

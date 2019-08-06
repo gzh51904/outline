@@ -12,4 +12,50 @@
     * 头条小程序
     * 百度小程序
     * ....
-    
+
+## day8-2
+
+### 面试题
+* review
+* release/hotfix
+* bug状态
+    * pending   
+    * open
+    * fixed
+    * reopen
+* event对象中的target与currentTarget分别是什么
+    * target事件源对象（触发事件的元素）
+    * currentTarget（绑定事件的元素）
+
+### 复习
+* 小程序
+    * 优势
+    * 应用技术
+        * html+css+js
+        * es6
+        * vue
+        * react
+    * 文件类型
+        * json  配置
+        * js    逻辑（js）
+        * wxml  结构（html）
+        * wxss  效果（css）
+        * wxs   模块化
+    * 文件分类
+        * 全局通用
+        * 页面级别
+
+### 知识点
+* 文件类型
+    * json  配置
+    * js    逻辑（js）
+    * wxml  结构（html）
+    * wxss  效果（css）
+* 事件
+    * bind
+    * 获取event对象
+    * 如何传参
+        * data-*
+* wxs
+    * WXS 的运行环境和其他 JavaScript 代码是隔离的，WXS 中不能调用其他 JavaScript 文件中定义的函数，也不能调用小程序提供的API
+    * WXS 函数不能作为组件的事件回调。

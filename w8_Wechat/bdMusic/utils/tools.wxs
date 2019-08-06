@@ -1,0 +1,6 @@
+function getSize(size) {
+  size = size / 1024 / 1024
+  return size.toFixed(1)
+}
+
+module.exports.getSize = getSize;

@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 轮播图 -->
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+    <swiper-item wx:for="{{recommend}}" wx:key="song_id" data-target="player" data-songid="{{item.song_id}}" bind:tap="goto">
+      <image src="{{item.pic_premium}}" class="slide-image" />
+    </swiper-item>
+  </swiper>
+  <!-- 搜索 -->
+  <view class="weui-search-bar__form" bind:tap="goto" data-target="search">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{keyword}}" />
+    </view>
+    <label class="weui-search-bar__label">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">{{keyword}}</view>
+    </label>
+  </view>
+</view>
