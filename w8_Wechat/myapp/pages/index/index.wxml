@@ -10,5 +10,15 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
     <view>小程序</view>
+    <view wx:for="{{users}}" wx:key="*this" wx:for-item="outItem" wx:for-index="idx">
+    {{idx}} - {{outItem}}
+     -> <text wx:for="{{outItem.length}}" wx:key="*this">{{item}}</text>
+    
+    </view>
+
+  <block  wx:if="{{10>5}}">
+    <view> view1 </view>
+    <view> view2 </view>
+  </block>
   </view>
 </view>
