@@ -25,7 +25,7 @@
   <view class="weui-tab">
     <view class="weui-navbar">
       <block wx:for="{{tabs}}" wx:key="type">
-        <view data-idx="{{index}}" data-type="{{item.type}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bind:tap="handlerTabChange">
+        <view data-index="{{index}}" data-type="{{item.type}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bind:tap="handlerTabChange">
           <view class="weui-navbar__title">{{item.text}}</view>
         </view>
       </block>
@@ -38,4 +38,7 @@
       </view>
     </view>
   </view>
+
+  <!-- 热门歌曲 -->
+  <template is="panel" data="{{title:'热门歌曲',more:true,type:2,datalist:hotlist}}" />
 </view>

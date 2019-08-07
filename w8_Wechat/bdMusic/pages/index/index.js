@@ -14,7 +14,8 @@ Page({
       // 1:[],
       // 21:[],
       // 16:[]
-    }
+    },
+    hotlist:[]
   },
   
   onLoad: async function () {
@@ -45,7 +46,7 @@ Page({
 
     // 获取tab标签切换的数据（进入只获取当前Tab数据，其他tab待点击时才发起请求）
     let currentType = tabs[activeIndex].type;//1,21
-    let currentTabData = await this.getData({ type: currentType});
+    let currentTabData = await this.getData({ type: currentType,size:3});
 
     // let tabData = this.data.tabData;
     // tabData[currentType] = currentTabData.song_list;
@@ -55,8 +56,13 @@ Page({
       [currentType]: currentTabData.song_list
     }
 
+    // 热门歌曲数据
+    let hotlist = await this.getData({type:2,size:8})
+    hotlist = hotlist.song_list;
+
     this.setData({
-      tabData
+      tabData,
+      hotlist
     })
   },
 
@@ -83,15 +89,23 @@ Page({
     })
   },
 
-  handlerTabChange(e){
-    let index = e.currentTarget.dataset.idx;
+  async handlerTabChange(e){
+    let {index,type} = e.currentTarget.dataset;
     let sliderOffset = this.data.tabWidth*index;
     this.setData({
       sliderOffset,
       activeIndex:index
     });
 
+    // 切换tab请求数据
+    let tabData = this.data.tabData;
+    if (tabData[type]) return;
 
+    let currentTabData = await this.getData({type,size:3});
+    tabData[type] = currentTabData.song_list;
+    this.setData({
+      tabData
+    })
   },
   
   // gotoSearch(){

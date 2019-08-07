@@ -59,3 +59,33 @@
 * wxs
     * WXS 的运行环境和其他 JavaScript 代码是隔离的，WXS 中不能调用其他 JavaScript 文件中定义的函数，也不能调用小程序提供的API
     * WXS 函数不能作为组件的事件回调。
+
+## day8-3
+
+### 知识点
+* wxml模板与引用
+    * `<template>`
+        * 定义参数
+            * name
+        * 使用参数
+            * is
+            * data（对象，对象的属性可以直接在template中使用）
+    * 引入
+        `<import/>`
+            * src
+* wxs的使用
+    * {{}}
+    * <wxs> 模块脚本文件
+        * src（可选）
+        * module （必写）
+        * 导出模块
+    ```html
+        <script>
+        // js代码
+        </script>
+        <script src="xxx.js"/>
+        <script type="module">
+            // ES Module 模块化
+            var username = 'jingjing'
+        </script>
+    ```

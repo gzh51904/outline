@@ -1,2 +1,4 @@
-<!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<!-- 利用<import/>引入模板 -->
+<import src="/template.wxml"/>
+
+<template is="panel" data="{{datalist}}" />

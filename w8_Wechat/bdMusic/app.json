@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/list/list",
     "pages/index/index",
     "pages/search/search",
-    "pages/player/player",
-    "pages/list/list"
+    "pages/player/player"
   ],
   "window":{
     "backgroundTextStyle":"light",

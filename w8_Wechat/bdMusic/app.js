@@ -56,5 +56,27 @@ App({
       text: '摇滚',
       title: '摇滚重金属'
     }]
-  }
+  },
+
+  getData({ type = 2, size = 5, offset = 0, method = 'baidu.ting.billboard.billList' } = {}) {
+    return new Promise((resolve, reject) => {
+
+      wx.request({
+        url: 'http://tingapi.ting.baidu.com/v1/restserver/ting',
+        data: {
+          method,
+          type,
+          size,
+          offset
+        },
+        success: ({ data }) => {
+
+          resolve(data);
+        },
+        fail(err) {
+          reject(err)
+        }
+      });
+    })
+  },
 })

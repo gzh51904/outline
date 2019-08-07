@@ -22,15 +22,19 @@
   module.exports = goto;
 </wxs> -->
 <template name="more">
-  <view class="weui-cell weui-cell_access weui-cell_link" data-type="{{type}}" bindtap="gotoList">
-    <view class="weui-cell__bd">查看更多</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </view>
+  <navigator url="/pages/list/list?type={{type}}">
+    <view class="weui-cell weui-cell_access weui-cell_link">
+      <view class="weui-cell__bd">查看更多</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </navigator>
 </template>
 
 <template name="panel">
   <view class="weui-panel weui-panel_access">
-    <view class="weui-panel__hd" wx:if="{{title}}" data-type="{{type}}" bindtap="gotoList">{{title}}</view>
+    <navigator url="/pages/list/list?type={{type}}">
+      <view class="weui-panel__hd" wx:if="{{title}}">{{title}}</view>
+    </navigator>
     <view class="weui-panel__bd">
       <template is="list" data="{{datalist}}" />
     </view>
