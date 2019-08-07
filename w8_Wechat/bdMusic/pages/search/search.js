@@ -7,7 +7,8 @@ Page({
   data: {
     inputShowed: true,
     inputVal: "",
-    result:[]
+    result:[],
+    timer:null
   },
   showInput: function() {
     this.setData({
@@ -22,13 +23,23 @@ Page({
   },
   clearInput: function() {
     this.setData({
-      inputVal: ""
+      inputVal: "",
+      result:[]
     });
   },
   inputTyping: function(e) {
     this.setData({
       inputVal: e.detail.value
     });
+
+
+    // 防抖
+    clearTimeout(this.data.timer);
+    this.data.timer = setTimeout(()=>{
+      // 如果输入框为空，则不发起请求
+      if (e.detail.value.trim() == '') return;
+      this.getData(e.detail.value)
+    },600)
   },
 
 // 获取歌曲大小（m）
@@ -36,30 +47,39 @@ Page({
     return (size / 1024 / 1024).toFixed(1)
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    console.log(options)
+  getData(keyword){
     // 发起请求，获取数据
     wx.request({
       url: 'http://tingapi.ting.baidu.com/v1/restserver/ting',
       data: {
         method: 'baidu.ting.search.catalogSug',
-        query: options.keyword,
+        query:keyword || this.data.keyword,
       },
       success: ({
         data
       }) => {
-        console.log('search:',data);
+        console.log('search:', data);
 
         // 如何修改Data数据
         this.setData({
-          result:data.song,
-          inputVal:options.keyword
+          result: data.song
         })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    console.log(options);
+
+    // setData不会立即修改data属性，而是进入一个队列
+    this.setData({
+      inputVal: options.keyword
+    });
+
+    this.getData(options.keyword);
   },
 
   /**
