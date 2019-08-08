@@ -1,1 +1,4 @@
 /* pages/player/player.wxss */
+.image{position:relative;}
+.image  > image{width:100%;}
+.btnPlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}

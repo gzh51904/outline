@@ -51,6 +51,7 @@
     * js    逻辑（js）
     * wxml  结构（html）
     * wxss  效果（css）
+    * wxs   模块化脚本
 * 事件
     * bind
     * 获取event对象
@@ -89,3 +90,6 @@
             var username = 'jingjing'
         </script>
     ```
+## day8-4
+
+### 知识点

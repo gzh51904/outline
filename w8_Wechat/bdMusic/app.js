@@ -58,7 +58,7 @@ App({
     }]
   },
 
-  getData({ type = 2, size = 5, offset = 0, method = 'baidu.ting.billboard.billList' } = {}) {
+  getData({ type = 2, size = 5, offset = 0, method = 'baidu.ting.billboard.billList',data={}} = {}) {
     return new Promise((resolve, reject) => {
 
       wx.request({
@@ -67,7 +67,8 @@ App({
           method,
           type,
           size,
-          offset
+          offset,
+          ...data
         },
         success: ({ data }) => {
 
