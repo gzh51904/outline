@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+
+const regeneratorRuntime = require("regenerator-runtime");
 
 Page({
   data: {
@@ -126,6 +128,13 @@ Page({
     let query = songid ? 'songid='+songid : 'keyword='+this.data.keyword
     wx.navigateTo({
       url: url + '?' + query
+    })
+  },
+
+  // 拍照
+  handleTakePhoto(){
+    wx.navigateTo({
+      url: '/pages/camera/camera',
     })
   }
 })

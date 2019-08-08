@@ -1,6 +1,6 @@
 // pages/player/player.js
 let app = getApp();
-
+const regeneratorRuntime = require("regenerator-runtime");
 Page({
 
   /**

@@ -42,3 +42,5 @@
   <!-- 热门歌曲 -->
   <template is="panel" data="{{title:'热门歌曲',more:true,type:2,datalist:hotlist}}" />
 </view>
+<button bindtap='handleTakePhoto'>拍照</button>
+<navigator url="/pages/map/map">地图</navigator>

@@ -3,6 +3,8 @@
     "pages/index/index",
     "pages/player/player",
     "pages/list/list",
+    "pages/camera/camera",
+    "pages/map/map",
     "pages/search/search"
   ],
   "window":{
@@ -10,5 +12,13 @@
     "navigationBarBackgroundColor": "#58bc58",
     "navigationBarTitleText": "百度音乐",
     "navigationBarTextStyle":"white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    },
+    "scope.camera":{
+      "desc": "你的摄像头信息将用于小程序位置接口的效果展示"
+    }
   }
 }

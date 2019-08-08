@@ -1,6 +1,7 @@
 // pages/list/list.js
 let app = getApp();
 
+const regeneratorRuntime = require("regenerator-runtime");
 
 Page({
 
