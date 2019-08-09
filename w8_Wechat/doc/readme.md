@@ -115,3 +115,14 @@
 
 * Audio & Video
 
+* 小程序开发框架
+    * 基于Vue的开发框架
+        * mpvue
+        * uni-app
+    * 类Vue的开发框架
+        * wepy
+
+## day8-5
+
+### 知识点
+* 微信公众号
