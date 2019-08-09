@@ -126,3 +126,25 @@
 
 ### 知识点
 * 微信公众号
+
+* 跨域请求
+    * options
+    * Access-Control-Allow-Origin:'*'
+    * Access-Control-Allow-Methods:
+    * Access-Control-Allow-Headers:'Content-Type'
+
+* ReactNative
+    * 特点
+        * 编写Native应用框架
+        * 使用web技术（JS/JSX,css）
+        * 使用UI框架
+    * 环境安装
+        * Nodejs v10+
+        * react-native-cli
+        * python2
+        * JDK1.8
+        * Android SDK
+            * 建议直接安装Android Studio
+            * 注意
+                * 有一个稳定的翻墙工具
+        * 配置环境变量
