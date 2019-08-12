@@ -72,3 +72,24 @@ React Native 看起来很像 React，只不过其基础组件是原生组件而�
 
 ### API
 > 详情请查看官网 https://facebook.github.io/react-native/
+
+
+## UI框架
+* `react-native-elements`
+    1. 安装
+    ```bash
+        npm install react-native-elements
+
+        #yarn
+        yarn add react-native-elements --save
+    ```
+    2. 安装`react-native-vector-icons`
+    ```bash
+        yarn add react-native-vector-icons --save-dev
+    ```
+    3. 关联原生组件：link
+    ```bash
+        react-native link react-native-vector-icons
+    ```
+
+* Expo 

@@ -1,5 +1,10 @@
 apply plugin: "com.android.application"
 
+// 如果图标无法显示，则添加以下代码
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+打包
+
 import com.android.build.OutputFile
 
 /**
