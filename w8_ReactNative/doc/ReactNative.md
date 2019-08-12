@@ -93,3 +93,88 @@ React Native 看起来很像 React，只不过其基础组件是原生组件而�
     ```
 
 * Expo 
+
+## 状态管理工具
+* redux                 mobx
+* react-redux           mobx-react
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import { observable, action } from "mobx";
+import { observer } from "mobx-react";
+
+// create State object 类似于createStore(reducer)
+let appState = observable({ timer: 0 });
+
+// define action
+setInterval(
+    action(() => {
+        appState.timer += 1;
+    }),
+    1000
+);
+
+appState.resetTimer = action(() => {
+    appState.timer = 0;
+});
+
+// create observer
+let App = (props) => {
+    return (
+        <div className="App">
+            <h1>Time passed
+: {props.appState.timer}</h1>
+            <button onClick={props.appState.resetTimer}>reset timer</button>
+        </div>
+    );
+}
+
+// 类似于connect
+App = observer(App);
+
+ReactDOM.render(
+    <App appState={appState} />, 
+    document.getElementById("root")
+);
+```
+
+* 如何判断两个对象内容一致
+```js
+    let obja = {username:'jingjing',age:36}
+    let objb = {username:'jingjing',age:36}
+
+    obja == objb;//false
+
+    // lodash.js, 
+    // underscore.js 
+    // immutable.js, 
+
+    import Immutable from 'immutable';
+    let mapA = Immutable.Map(obja);
+    let mapB = Immutable.Map(objb);
+
+    Imutable.is(mapA,mapB);//true
+
+    // Immutable Data 是一旦创建，就不能再被更改的数据
+    // 修改的方法set返回一个新的Immutable Data
+    mapA = mapA.set('age',38);
+
+    let user = {username:'laoxie',age:18,score:{
+        cn:148,
+        math:149,
+        en:150
+    }}
+    mapA = mapA.setIn(['score','math'],138);
+```
+* 深拷贝与浅拷贝
+    * newObj = obj;//复制引用
+    * 浅拷贝
+        * Object.assign({},obj)
+        * {...obj}
+    * 深拷贝
+        * 递归
+        * JSON.parse(JSON.stringify());
+        * 使用工具
+            * immutable.js, 
+            * lodash.js, 
+            * underscore.js 
