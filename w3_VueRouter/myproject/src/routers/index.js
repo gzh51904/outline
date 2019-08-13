@@ -166,7 +166,7 @@ router.beforeEach((to,from,next)=>{
     // 判断目标路由是否需要登录权限才可访问
     if(to.matched.some(item=>item.meta.requiresAuth)){
         let token = localStorage.getItem('Authorization');
-        axios.get('/verify')
+        axios.get('/verify');//为了校验token是否过期或则伪造
         // 用户已登录
         if(token){
             next();
